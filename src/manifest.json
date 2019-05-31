@@ -1,0 +1,44 @@
+{
+	"manifest_version": 2,
+	"name": "R20 OBS",
+	"version": "0.0.0",
+	"version_name": "0.0.0",
+
+	"description": "An unofficial extension to allow Roll20 to communicate with an OBS web socket. ",
+	"icons": {
+		"16": "images/icon16.png",
+		"48": "images/icon48.png",
+		"128": "images/icon128.png"
+	},
+	"author": "Dustin Hickman (dmhickman92@gmail.com)",
+	"background": {
+		"scripts": ["scripts/lib/jquery.min.js","hot-reload.js"],
+		"persistent": true
+	},
+	"content_scripts": [
+		{
+		"matches": ["*://app.roll20.net/editor/*"],
+		"js": ["scripts/lib/jquery.min.js","scripts/main.js"]
+		}	
+	],
+	"externally_connectable": {
+		"matches": ["*://supportcenter.rbdigital.com/*"]
+	},
+	"permissions": [
+		"activeTab",
+		"contextMenus",
+		"nativeMessaging",
+		"webRequest",
+		"webRequestBlocking",
+		"storage",
+		"*://supportcenter.rbdigital.com/*",
+		"https://www.rbdigital.com/srv_tools/patron_search.php"
+	],
+	"web_accessible_resources": [
+		"images/*.png"
+	],
+	"browser_action":{
+		"default_icon": "images/icon48.png"
+	},
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
