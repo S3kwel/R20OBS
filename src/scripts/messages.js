@@ -6,14 +6,10 @@ $(async function(){
 	let firstMutation = true; 
 	
 	let chatBox = $(`.content`); 
-	let jB = $('#jukeboxwhatsplaying');
-	//let nP = jb.find('.nowplayingtitle');
-	
-	
-	jB.css('border','1px solid red'); 
-	//nP.css('border','2px solid green');  
+	let jB = $('#jukeboxwhatsplaying'); 
 	
 	let config = {attributes: false, childList: true, subtree: false};
+
 	
 	var process = function(mutationList, observer){
 	
@@ -33,19 +29,11 @@ $(async function(){
 	}
 	
 	
-	var checkMusic = function(mutationList, observer){
-		if(m.type == 'childList' && firstMutation == false){
-				let message = m.addedNodes[0];
-				log("MUSIC"); 
-				console.log(message);
-			}
-	}
+	
 	
 	var messages = new MutationObserver(process);
-	var music = new MutationObserver(checkMusic);
 	
 	messages.observe(chatBox[0], config);
-	music.observe(jB[0], config);
 	
 	//$(text).css('border','3px solid blue'); 
 })

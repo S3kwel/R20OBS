@@ -17,8 +17,12 @@
 	},
 	"content_scripts": [
 		{
-		"matches": ["*://app.roll20.net/editor/*"],
-		"js": ["scripts/lib/jquery.min.js","scripts/main.js"]
+		"matches": ["*://app.roll20.net/editor/"],
+		"js": ["scripts/lib/jquery.min.js","scripts/messages.js"]
+		},
+		{
+		"matches": ["*://app.roll20.net/editor/popoutjukebox*"],
+		"js": ["scripts/lib/jquery.min.js","scripts/jukebox.js"]
 		}	
 	],
 	"externally_connectable": {
