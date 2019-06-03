@@ -22,7 +22,8 @@
 		},
 		{
 		"matches": ["*://app.roll20.net/editor/popoutjukebox*"],
-		"js": ["scripts/lib/jquery.min.js","scripts/jukebox.js"]
+		"css": ["styles/jukebox.css"],
+		"js": ["scripts/lib/jquery.min.js","scripts/popoutjb.js"]
 		}	
 	],
 	"externally_connectable": {
@@ -39,7 +40,8 @@
 		"https://www.rbdigital.com/srv_tools/patron_search.php"
 	],
 	"web_accessible_resources": [
-		"images/*.png"
+		"images/*.png",
+		"scripts/modules/*.js"
 	],
 	"browser_action":{
 		"default_icon": "images/icon48.png"

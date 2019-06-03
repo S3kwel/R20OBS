@@ -1,0 +1,10 @@
+.robs{
+	color: red; 
+}
+
+.robs.info{
+	box-sizing: border-box;
+	border: 1px solid grey; 
+	width: 100%;
+	background-color: #4286f4;
+}
