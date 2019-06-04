@@ -1,5 +1,6 @@
 class jukebox{
 	constructor($){
+		$(function(){
 		let templates = {};
 		templates['reload'] = 
 		`<div class = 'robs info'>
@@ -20,7 +21,7 @@ class jukebox{
 
 		if(this.songText == undefined || this.songText.indexOf('Nothing, currently.') != -1){
 			
-			$(`#containerdiv`).children().first().prepend(templates['reload']); 
+			$(`.instructions`).html(templates['reload']); 
 		}
 		else{
 			$(`#containerdiv`).children().first().prepend('aaa')
@@ -28,7 +29,8 @@ class jukebox{
 		
 	
 			
-		}
+		})
+	}
 }
 
 let j = jukebox;
