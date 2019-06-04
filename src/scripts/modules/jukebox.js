@@ -4,7 +4,13 @@ class jukebox{
 		let templates = {};
 		templates['reload'] = 
 		`<div class = 'robs info'>
-			<h5>test</h5>
+			<div class = 'info header'>
+			    <span class='dismiss'>X</span>
+				No song is playing!
+			</div>
+			<div class='info body'>
+				Connection to the websocket will begin as soon as something is played.
+			</div>
 		</div>`;
 		
 		//Remove all existing elements. 
