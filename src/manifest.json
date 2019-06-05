@@ -41,6 +41,7 @@
 	],
 	"web_accessible_resources": [
 		"images/*.png",
+		"templates/*",
 		"scripts/modules/*.js"
 	],
 	"browser_action":{
