@@ -15,7 +15,7 @@ class jukebox{
 
 		//If the standard message is there OR it's undefined
 		if(this.songText == undefined || this.songText.indexOf('Nothing, currently.') != -1){
-			note.add('noSong',{TITLE:"NO SONG PLAYING",INFO:"WTF YO"}); 
+			note.add('noSong',{TITLE:"No song is playing!",INFO:"Select a song/playlist to send the information to OBS."}); 
 		}
 		else{
 			//this.addNote(templates['reload']); 

@@ -1,7 +1,7 @@
 <div id = 'note' type=""text/templater">
 	<div class = 'robs info'>
 			<div class = 'info header'>
-			    <span class='dismiss'>X</span>
+			    <span><a class='dismiss' href = "#">X</a></span>
 				{{TITLE}}
 			</div>
 			
