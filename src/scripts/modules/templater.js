@@ -43,6 +43,7 @@ class templater{
 			}
 		}
 		
+		
 		return tempText; 
 	}
 	

@@ -13,11 +13,23 @@ class notes{
 			templater = templater.default;
 			templater = new templater(this.$,'note',options);
 			this.templater = templater; 
+			this.id = id; 
 		}
 		
+		//Parse the template
 		let noteText = await this.templater.parse();
-		this.$(this.target).html(noteText); 
 		
+		//Set the ID.  
+		alert(this.id); 
+		noteText = $(noteText).attr('id',this.id); 
+		
+		//Append the element. 
+		this.$(this.target).replaceWith(noteText); 
+		
+		this.$(`#${this.id}`).click(this.remove); 
+	}
+	remove(){
+		$(`#${this.id}`).remove(500); 
 	}
 	
 }
