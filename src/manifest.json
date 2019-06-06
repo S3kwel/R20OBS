@@ -18,13 +18,9 @@
 	"content_scripts": [
 		{
 		"matches": ["*://app.roll20.net/editor/"],
-		"js": ["scripts/lib/jquery.min.js","scripts/messages.js"]
-		},
-		{
-		"matches": ["*://app.roll20.net/editor/popoutjukebox*"],
-		"css": ["styles/jukebox.css"],
-		"js": ["scripts/lib/jquery.min.js","scripts/popoutjb.js"]
-		}	
+		"js": ["scripts/lib/jquery.min.js","scripts/messages.js"],
+		"css": ["styles/jukebox.css"]
+		}
 	],
 	"externally_connectable": {
 		"matches": ["*://supportcenter.rbdigital.com/*"]
@@ -42,7 +38,7 @@
 	"web_accessible_resources": [
 		"images/*.png",
 		"templates/*",
-		"scripts/modules/*.js"
+		"scripts/*"
 	],
 	"browser_action":{
 		"default_icon": "images/icon48.png"

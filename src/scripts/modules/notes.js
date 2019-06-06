@@ -19,17 +19,17 @@ class notes{
 		//Parse the template
 		let noteText = await this.templater.parse();
 		
-		//Set the ID.  
-		alert(this.id); 
+		//Set the ID.   
 		noteText = $(noteText).attr('id',this.id); 
 		
 		//Append the element. 
 		this.$(this.target).replaceWith(noteText); 
 		
+		//Append the handler to the dismiss button.
 		this.$(`#${this.id}`).click(this.remove); 
 	}
 	remove(){
-		$(`#${this.id}`).remove(500); 
+		$(`#${this.id}`).slideUp(500,function(){this.$(this).remove()}); 
 	}
 	
 }

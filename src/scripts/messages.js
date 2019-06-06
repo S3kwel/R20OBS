@@ -25,11 +25,22 @@ $(async function(){
 		}
 		
 		//Prevents the first mutation -- the loading of old messages -- from triggering anything.  
-		if(firstMutation == true){firstMutation = false;}
+		if(firstMutation == true){
+			firstMutation = false;
+			jukeBoxScrub(); 
+			}
 	}
 	
 	
-	
+	async function jukeBoxScrub(){
+		const jb_src = chrome.extension.getURL("scripts/modules/jukebox.js");
+		
+		let jukebox = await import(jb_src);
+		jukebox = jukebox.default;
+
+		let JB = new jukebox($); 
+		JB.start(); 
+	}
 	
 	var messages = new MutationObserver(process);
 	
