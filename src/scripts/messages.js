@@ -1,7 +1,10 @@
-$(async function(){
+$(async function () {
+
+
+
 	function log(message){
 		console.log(`%c ${message}`,`background: #222; color: #bada55`);
-	}
+    }
 	
 	let firstMutation = true; 
 	
@@ -17,9 +20,30 @@ $(async function(){
 		for(m of mutationList){
 			if(m.type == 'childList' && firstMutation == false){
 				let message = m.addedNodes[0];
-				var classArray = [...message.classList];
-				if(classArray.indexOf('you') != -1){
-					log("YOU") 
+				if(message != undefined){
+                    var classArray = [...message.classList];
+                    /* Response to own messages. 
+                    
+					if(classArray.indexOf('you') != -1){
+						log("YOU") 
+					}
+                    */
+                    if (classArray.indexOf('system') == -1) {
+                        //Extract datafrom the return
+                        
+
+                        //messageid
+                        let id = $(message).data('messageid');
+                        let avatar = `https://app.roll20.net` + $(message).children().find('img').attr('src');
+                        let timeStamp = $(message).children('.tstamp').html();
+                        let by = $(message).children('.by').html();
+                        let content = $(message).html();
+                        content = content.substring(content.lastIndexOf(':')+8);
+
+                        let r = { 'id': id, 'avatar': avatar, 'timestamp': timeStamp, 'by': by, 'content': content };
+                        console.log(r); 
+                    }
+                    
 				}
 			}
 		}
@@ -27,7 +51,8 @@ $(async function(){
 		//Prevents the first mutation -- the loading of old messages -- from triggering anything.  
 		if(firstMutation == true){
 			firstMutation = false;
-			jukeBoxScrub(); 
+				log("Scrubbing Jukebox."); 
+				jukeBoxScrub(); 
 			}
 	}
 	
