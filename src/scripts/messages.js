@@ -18,16 +18,15 @@ $(async function () {
 	
 		
 		for(m of mutationList){
-			if(m.type == 'childList' && firstMutation == false){
+            if (m.type == 'childList' && firstMutation == false) {
+
+                //Listen to calls from the background to send messages to external?
+               
+
 				let message = m.addedNodes[0];
 				if(message != undefined){
                     var classArray = [...message.classList];
-                    /* Response to own messages. 
-                    
-					if(classArray.indexOf('you') != -1){
-						log("YOU") 
-					}
-                    */
+
                     if (classArray.indexOf('system') == -1) {
                         //Extract datafrom the return
                         
@@ -39,8 +38,17 @@ $(async function () {
                         let by = $(message).children('.by').html();
                         let content = $(message).html();
                         content = content.substring(content.lastIndexOf(':')+8);
+                        var r = {'type':'ROBS','id': id, 'avatar': avatar, 'timestamp': timeStamp, 'by': by, 'content': content };
 
-                        let r = { 'id': id, 'avatar': avatar, 'timestamp': timeStamp, 'by': by, 'content': content };
+                        //Send message to background. 
+                        chrome.runtime.sendMessage(r);
+                        r = {}; 
+
+                        
+
+
+
+                        chrome.runtime.sendMessage(r);
                         console.log(r); 
                     }
                     

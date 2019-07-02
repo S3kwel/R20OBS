@@ -1,6 +1,30 @@
+//EXTERNAL
 chrome.runtime.onMessageExternal.addListener(
     function (message, sender, sendResponse) {
         alert("in background");
-        sendResponse("1");
+        chrome.runtime.sendMessage({ id: 'getMessage' }, function (r) {
+            console.log(r); 
+        });
+
+        //sendResponse({ s: true, r: 'test' });
     }
 );
+
+
+//INTERNAL
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        if (request.type == "ROBS") {
+
+            $.ajax({
+                url: `http://localhost/index.php`,
+                type: "POST",
+                data: request,
+                success: function (r) {
+                    console.log(r); 
+                }
+            });
+            
+        }
+        
+    });
