@@ -1,4 +1,8 @@
 {
-  "ExpandedNodes": [],
+  "ExpandedNodes": [
+    "",
+    "\\scripts"
+  ],
+  "SelectedNode": "\\scripts\\messages.js",
   "PreviewInSolutionExplorer": false
 }
