@@ -33,7 +33,7 @@ $(async function () {
 
                         //messageid
                         let id = $(message).data('messageid');
-                        let avatar = `https://app.roll20.net` + $(message).children().find('img').attr('src');
+                        let avatar = `https://app.roll20.net` + $(message).children().find('img').eq(0).attr('src');
                         let timeStamp = $(message).children('.tstamp').html();
                         let by = $(message).children('.by').html();
                         let content = $(message).html();
@@ -42,6 +42,7 @@ $(async function () {
 
                         //Send message to background. 
                         chrome.runtime.sendMessage(r);
+                        console.log(r); 
                         r = {}; 
 
                         
