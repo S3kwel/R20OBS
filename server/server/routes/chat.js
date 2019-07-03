@@ -62,8 +62,18 @@ function addMessage(data,res,app){
     //console.log(escape(data.content));
     //Text chat.
    // console.log(data); 
+
+    /*
+     * SQLITE3 apparently throws the last added row to a variable.
+     * Exploit that to render new messages from the client.  
+     * https://github.com/mapbox/node-sqlite3/wiki/API#databasepreparesql-param--callback
+     * 
+     * See the shit you hurriedly typed into the function below. 
+     * */
     if (typeof data.result == 'undefined') {
-        var ins = db.prepare(`INSERT INTO chats(date,chatid,avatar,content,by) VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${escape(data.content)}","${data.by}")`);
+        var ins = db.prepare(`INSERT INTO chats(date,chatid,avatar,content,by) VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${escape(data.content)}","${data.by}")`null, function () {
+            this.changes;
+        });
         ins.run();
         ins.finalize();
 
