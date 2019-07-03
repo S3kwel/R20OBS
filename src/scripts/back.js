@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener(
         if (request.type == "ROBS") {
 
             $.ajax({
-                url: `http://localhost:1337/`,
+                url: `http://localhost:9000/`,
                 type: "POST",
                 data: request,
                 success: function (r) {

@@ -17,13 +17,14 @@ else{
     fs.copyFileSync(templateDB,dbpath); 
     console.log("created."); 
 }
+
 //':memory:' appears to assign the db to memory.  
 var db = new sqlite3.Database(dbpath);
 
 //Accepts the rendered output and passes it to the chat page.
 function renderHandler(err,html){
     request.post({ headers: {'content-type' : 'text/plain'}
-               , url: `http://localhost:1337/render`, body: html }
+        , url: `http://localhost:${process.env.PORT}/render`, body: html }
                , function(error, response, body){
                 console.log(body); 
     }); 
@@ -36,7 +37,7 @@ function renderHandler(err,html){
 function addChat(data){
     console.log("ADDCHAT"); 
     request.post({ headers: {'content-type' : 'application/json'}
-               , url: `http://localhost:1337/render`, body: JSON.stringify(data) }
+        , url: `http://localhost:${process.env.PORT}/render`, body: JSON.stringify(data) }
                , function(error, response, body){
                 console.log(body); 
     }); 
@@ -50,13 +51,13 @@ function addChat(data){
 //Add this information to a database, have the 'get' version of this page render upon an update? 
 //Postgres via express? 
 function addMessage(data,res){
-   data = data.body; 
-  var ins = db.prepare(`INSERT INTO chats VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${data.content}")`);
+    data = data.body; 
+  var ins = db.prepare(`INSERT INTO chats VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${data.content}","${data.by}")`);
   ins.run();
   ins.finalize(); 
-
-  db.each('SELECT rowid AS id, * FROM chats', function (err, row) {
-    console.log(row)
+    
+    db.each('SELECT rowid AS id, * FROM chats ORDER BY id DESC LIMIT 1;', function (err, row) {
+    console.log(`Added message "${row.content}", from ${row.by}`)
   }); 
 }
 
@@ -65,15 +66,35 @@ function addMessage(data,res){
 function sendMessage(data,res) {
     console.log("SENDMESSAGE");
     addChat(data);  
-        
-
     //TO USE TEMPLATES.
     //res.render('chat', data, function(err,html){
     //    renderHandler(err,html); 
     //});
 }
+var rows = []; 
+function getData() {
+    console.log("Pulling the last 100 messages from chat!"); 
+    return new Promise((resolve, reject) => {
+        db.all("SELECT * FROM chats ORDER BY rowid", [], (err, rows) => {
+            rows.forEach((row) => {
+                rows.push(row); 
+            });
+
+            resolve(rows); 
+        });
+    });   
+}
+
+async function prepBox(err, html, res){
+    let d = await getData(); 
+    res.render('chatBox', {data:JSON.stringify(d)}); 
+};
+
+
+
 
 module.exports = {
     sendMessage: sendMessage,
-    addMessage: addMessage
+    addMessage: addMessage,
+    prepBox: prepBox
 }

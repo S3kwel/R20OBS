@@ -23,31 +23,58 @@ $(async function () {
                 //Listen to calls from the background to send messages to external?
                
 
-				let message = m.addedNodes[0];
-				if(message != undefined){
+                let message = m.addedNodes[0];
+               
+                if (message != undefined) {
+                    console.log("ADDED MESSAGE NODE IS ", message);
                     var classArray = [...message.classList];
 
                     if (classArray.indexOf('system') == -1) {
-                        //Extract datafrom the return
-                        
+                        //Extract data from the return
+
 
                         //messageid
                         let id = $(message).data('messageid');
-                        let avatar = `https://app.roll20.net` + $(message).children().find('img').eq(0).attr('src');
+                        let rightMessage = false;
+                        let msg = $(message);
+
+                        let childLen = msg.children().length;
+                            //console.log("INITIAL CHILDLEN IS", childLen);
+                         
+
+                        do {
+                            if (childLen != 0) {
+                                let by = $(msg).children('.by').html();
+                                console.log(by);
+                                console.log("FOUND RIGHT MESSAGE: ", msg);
+                                rightMessage = true;
+                            }
+                            else {
+                                msg = $(msg).prev('.message');
+                                childLen = msg.children().length;
+                                //console.log('NEXT MESSAGE IS', msg);
+                                //console.log('ITS CHILDLEN IS', childLen);
+                            }
+                        }
+                        while (rightMessage == false);
+                      
+                        let avatar = `https://app.roll20.net` + $(msg).children().find('img').eq(0).attr('src');
                         let timeStamp = $(message).children('.tstamp').html();
-                        let by = $(message).children('.by').html();
+                        by = $(msg).children('.by').html();
                         let content = $(message).html();
-                        content = content.substring(content.lastIndexOf(':')+8);
+
+                        //Pulls data after the name if present.
+                        //TODO: This won't work if the user's message has : in it. 
+                        if (content.match(/:/gmi) != null) {
+                            content = content.substring(content.lastIndexOf(':') + 8);
+                        }
+                       
                         var r = {'type':'ROBS','id': id, 'avatar': avatar, 'timestamp': timeStamp, 'by': by, 'content': content };
 
                         //Send message to background. 
                         chrome.runtime.sendMessage(r);
                         console.log(r); 
                         r = {}; 
-
-                        
-
-
 
                         chrome.runtime.sendMessage(r);
                         console.log(r); 

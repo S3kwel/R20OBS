@@ -20,7 +20,8 @@
     "pug": "^2.0.0-beta6",
     "request": "^2.88.0",
     "serve-favicon": "^2.3.0",
-    "sqlite3": "^4.0.9"
+    "sqlite3": "^4.0.9",
+    "unescape": "^1.0.1"
   },
   "engines": {
     "node": "~6.10.x"

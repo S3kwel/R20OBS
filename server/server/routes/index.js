@@ -15,8 +15,11 @@ router.post('/render',jsonParser, function (req, res) {
     res.send(chat.addMessage(req, res));
 });
 
-router.get('/render', function (req, res) {
-    res.render('chatBox');
+router.get('/', function (req, res) {
+    var r = res; 
+    res.render('chatBox', { title: 'Express', "data": req.body }, function (err,html) {
+        chat.prepBox(err, html,r); 
+    });
 });
 
 //router.get('/', function (req, res) {
