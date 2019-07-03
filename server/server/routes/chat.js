@@ -71,10 +71,10 @@ function addMessage(data,res,app){
      * See the shit you hurriedly typed into the function below. 
      * */
     if (typeof data.result == 'undefined') {
-        var ins = db.prepare(`INSERT INTO chats(date,chatid,avatar,content,by) VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${escape(data.content)}","${data.by}")`null, function () {
-            this.changes;
+        var ins = db.prepare(`INSERT INTO chats(date,chatid,avatar,content,by) VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${escape(data.content)}","${data.by}")`);
+        ins.run(function () {
+            console.log(this.lastID); 
         });
-        ins.run();
         ins.finalize();
 
         db.each('SELECT rowid AS id, * FROM chats ORDER BY id DESC LIMIT 1;', function (err, row) {
