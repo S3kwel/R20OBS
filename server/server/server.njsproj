@@ -31,7 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
-    <Content Include="public\javascripts\chat.js" />
+    <Content Include="public\stylesheets\roll20.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="routes\chat.js">
       <SubType>Code</SubType>
     </Content>
@@ -40,6 +42,7 @@
     <Content Include="package.json" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="README.md" />
+    <Content Include="views\roll.pug" />
     <Content Include="views\chat.pug" />
     <Content Include="views\chatBox.pug" />
     <Content Include="views\index.pug" />
@@ -50,6 +53,7 @@
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
+    <Folder Include="public\fonts\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
     <Folder Include="views\" />

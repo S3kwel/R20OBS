@@ -1,6 +1,7 @@
-﻿doctype html
-
-block content
+﻿block content
     .chat(data-messageid = `${id}`)
-        .avatar
-            img(src=`${avatar}`)
+        .infoBox
+            .name #{by}
+            .avatar(style=`background-image: url(${avatar})`)
+        .contentBox
+            .content !{content}

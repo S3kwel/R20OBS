@@ -1,8 +1,76 @@
-﻿body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+﻿@font-face {
+    font-family: 'Vecna';
+    src: url('/fonts/Vecna.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Verdana; 
 }
 
 a {
     color: #00B7FF;
+}
+.chat {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    background: linear-gradient( rgba(255,240,209,0.37), rgba(255,240,209,0.37) ), url(/images/message-bg2.jpg);
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    box-shadow: 10px 10px 5px 0px rgba(148,148,148,0.37);
+    margin-bottom: 20px; 
+}
+.infoBox{
+    display: flex; 
+    flex-direction: column;
+    border-right: 2px solid black; 
+}
+.name {
+    font-weight: bold;
+    text-align: center;
+    background-color: #0C1713;
+    color: white;
+    font-family: 'Vecna';
+}
+.avatar{
+    background-size: contain; 
+    width: 100px;
+    height: 100px; 
+    
+}
+
+.contentBox{
+    flex-grow: 1;
+    justify-self: flex-start;    
+}
+.spacer {
+    width: 100px; 
+}
+.content{
+    padding: 10px;
+    font-size: 16pt; 
+    font-weight: bold; 
+}
+
+.rollFormula {
+    font-style: italic;
+    color: black;
+}
+.rFormula {
+    font-family: 'Vecna';
+}
+
+.rollResult {
+    color: red;
+    font-family: 'Vecna';
+}
+.chatName {
+    font-size: 22pt; 
+    color: green;
+    font-family: 'Vecna';
+    margin-right: 5px; 
 }

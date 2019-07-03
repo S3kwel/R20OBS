@@ -13,6 +13,26 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var s = null; 
+
+//SOCKETIO
+const sserver = require('http').Server(app); 
+var io = require('socket.io')(sserver); 
+
+app.io = io; 
+
+
+io.on('connection', function (socket) {
+    console.log('client connected.');
+});
+
+
+
+
+//Cause the server to start listening on (hopefully) the next available port.  
+sserver.listen(process.env.PORT.substring(0, process.env.PORT.length - 1) + 1); 
+console.log('socket io server running.')
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

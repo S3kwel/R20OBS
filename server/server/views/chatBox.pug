@@ -1,24 +1,10 @@
 ﻿extends layout
 
 block content
-  h1= title
-  p Welcome to a thing
-  p #{data}
+  script(src="javascripts/socket.io.js")
   script.
-    var element = document.createElement('div');
-
-    function decodeHTMLEntities (str) {
-    if(str && typeof str === 'string') {
-      // strip script/html tags
-      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
-      element.innerHTML = str;
-      str = element.textContent;
-      element.textContent = '';
-    }
-
-    return str;
-    }
-    let d = decodeHTMLEntities(`#{data}`);
-    d = JSON.parse(d);
-    console.log(d); 
+    var socket = io.connect('http://localhost:9001');
+    socket.on('update', function (data) {
+         location.reload(); 
+    });
+  | !{data}

@@ -1,0 +1,92 @@
+<!-- WITHOUT ADVANTAGE -- >
+<div class="sheet-container">
+            <div class="sheet-result">
+                    <div class="sheet-solo">
+                        <span><span class="inlinerollresult showtip tipsy-n-right" original-title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 1d20cs>20 + 2[PROF] = (<span class=&quot;basicdiceroll&quot;>19</span>)+2">21</span></span>
+                    </div>
+            </div>
+                <div class="sheet-sublabel">
+                    <span>150/600</span>
+                </div>
+            <div class="sheet-label">
+                    
+                    <span><a href="~-LisWM-i0pJ1VS6e0ORz|repeating_attack_-LisYo8fySkI2JlqOFj3_attack_dmg">Longbow</a> <span>(+2)</span></span>
+            </div>
+        </div>
+
+
+<!-- WITH ADVANTAGE--> 
+<div class="sheet-container">
+            <div class="sheet-result">
+                    <div class="sheet-adv">
+                        <span><span class="inlinerollresult showtip tipsy-n-right" original-title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 1d20cs>20 + 2[PROF] = (<span class=&quot;basicdiceroll&quot;>19</span>)+2">21</span></span>
+                    </div>
+                    <div class="sheet-advspacer"></div>
+                    <div class="sheet-adv">
+                        <span><span class="inlinerollresult showtip tipsy-n-right" original-title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 1d20cs>20 + 2[PROF] = (<span class=&quot;basicdiceroll&quot;>2</span>)+2">4</span></span>
+                    </div>
+            </div>
+                <div class="sheet-sublabel">
+                    <span>150/600</span>
+                </div>
+            <div class="sheet-label">
+                    
+                    
+                    
+                    <span><a href="~-LisWM-i0pJ1VS6e0ORz|repeating_attack_-LisYo8fySkI2JlqOFj3_attack_dmg">Longbow</a> <span>(+2)</span></span>
+            </div>
+        </div>
+
+<!-- DAMAGE ROLL -->
+<div class="sheet-result">
+                        <div class="sheet-solo">
+                            <span class="sheet-damage"><span class="inlinerollresult showtip tipsy-n-right fullcrit" title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 1d8 = (<span class=&quot;basicdiceroll critsuccess &quot;>8</span>)">8</span></span>
+                            <span class="sheet-sublabel">Piercing</span>
+                        </div>
+            </div>
+
+
+<!-- DESCRIPTION -->
+<div class="sheet-desc sheet-info">
+                <span>
+                    <span class="sheet-top"></span><span class="sheet-middle">THIS IS A DESCRIPTIONJ</span><span class="sheet-bottom"></span>
+                </span>
+            </div>
+
+<!-- NON ATTACK SPELL --> 
+<div class="sheet-container">
+            <div class="sheet-title sheet-row">
+                <span>Light</span>
+            </div>
+            <div class="sheet-italics sheet-row">
+                <span>evocation cantrip</span>
+            </div>
+            <div class="sheet-spacer"></div>
+            <div class="sheet-row">
+                <span class="sheet-bold" data-i18n="casting-time:">Casting Time:</span> <span>1 action</span>
+            </div>
+            <div class="sheet-row">
+                <span class="sheet-bold" data-i18n="range:">Range:</span> <span>Touch</span>
+            </div>
+            <div class="sheet-row">
+                <span class="sheet-bold" data-i18n="target:">Target:</span> <span>One object that is no larger than 10 feet in any dimension</span>
+            </div>
+            <div class="sheet-row">
+                <span class="sheet-bold" data-i18n="components:">Components:</span>
+                <span>
+                    V, 
+                    
+                    M (A firefly or phosphorescent moss)
+                </span>
+            </div>
+            <div class="sheet-row">
+                <span class="sheet-bold" data-i18n="duration:">Duration:</span> <span>1 hour</span>
+            </div>
+            <div class="sheet-spacer"></div>
+            <div class="sheet-row">
+                <span class="sheet-description">You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action. If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</span>
+            </div>
+        </div>
+
+<!-- EMOTE -- > 
+<div class="message emote" data-messageid="-LisqS46bqY_zK6tjmWw"><div class="avatar" aria-hidden="true"><img src="/users/avatar/1233891/30"></div><div class="spacer"></div>Dustin (GM) test</div>
