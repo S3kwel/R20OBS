@@ -52,6 +52,7 @@ function addChat(data){
 //Postgres via express? 
 function addMessage(data,res,app){
     data = data.body; 
+    console.log(data);
     /*TODO
      * See Roll Templates to Integrate.txt for elements to pull data from.
      * This will probably need re-facotring. 
@@ -73,7 +74,10 @@ function addMessage(data,res,app){
     if (typeof data.result == 'undefined') {
         var ins = db.prepare(`INSERT INTO chats(date,chatid,avatar,content,by) VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${escape(data.content)}","${data.by}")`);
         ins.run(function () {
-            console.log(this.lastID); 
+            this.lastID;
+            db.get(`SELECT * FROM chats WHERE rowid=${this.lastID}`, function (err,row) {
+                app.io.emit("update", row,); 
+            });
         });
         ins.finalize();
 
@@ -81,19 +85,24 @@ function addMessage(data,res,app){
             console.log(`Added message "${row.content}", from ${row.by}`)
         });
 
-        app.io.emit("update"); 
+        
     }
     //Rolls
     else {
         var ins = db.prepare(`INSERT INTO chats (date,chatid,avatar,by,formula,result) VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${data.by}","${data.formula}","${data.result}")`);
-        ins.run();
+        ins.run(function () {
+            this.lastID;
+            db.get(`SELECT * FROM chats WHERE rowid=${this.lastID}`, function (err, row) {
+                app.io.emit("update", row);
+            });
+        });
         ins.finalize();
 
         db.each('SELECT rowid AS id, * FROM chats ORDER BY id DESC LIMIT 1;', function (err, row) {
             console.log(`${row.formula}/${row.result}, from ${row.by}`)
         }); 
 
-        app.io.emit("update"); 
+        
     }
     
    

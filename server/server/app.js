@@ -22,16 +22,7 @@ var io = require('socket.io')(sserver);
 app.io = io; 
 
 
-io.on('connection', function (socket) {
-    console.log('client connected.');
-});
 
-
-
-
-//Cause the server to start listening on (hopefully) the next available port.  
-sserver.listen(process.env.PORT.substring(0, process.env.PORT.length - 1) + 1); 
-console.log('socket io server running.')
 
 
 // view engine setup
@@ -49,6 +40,41 @@ app.use(cors());
 
 app.use('/', routes);
 app.use('/users', users);
+
+io.on('connection', function (socket) {
+    console.log(Object.keys(app));
+    console.log('client connected.');
+
+    socket.on('parse', function (data) {
+        console.log("PARSE REQUEST");
+        console.log(typeof data); 
+
+        if (data.content != null) {
+            data.content = unescape(data.content);
+            app.render('chat', data, function (err, data) {
+                socket.emit("parsed", data);
+            })
+        }
+        else {
+            //data.content = unescape(data.content);
+            console.log("PARSING AS ROLL");
+            app.render('roll', data, function (err, data) {
+                socket.emit("parsed", data);
+            })
+        }
+       
+
+        
+    })
+});
+
+
+
+
+//Cause the server to start listening on (hopefully) the next available port.  
+sserver.listen(process.env.PORT.substring(0, process.env.PORT.length - 1) + 1);
+console.log('socket io server running.')
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

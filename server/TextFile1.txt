@@ -1,0 +1,10 @@
+{
+  "date": "2019-07-03 22:36:05",
+  "chatid": "-LitykqCqYkxuQvQ1XTP",
+  "avatar": "https://app.roll20.net/users/avatar/1233891/30",
+  "content": "abvd",
+  "by": "Dustin (GM):",
+  "formula": null,
+  "result": null
+}
+

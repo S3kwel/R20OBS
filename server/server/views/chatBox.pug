@@ -2,9 +2,20 @@
 
 block content
   script(src="javascripts/socket.io.js")
+  script(src="javascripts/jquery.js")
   script.
     var socket = io.connect('http://localhost:9001');
-    socket.on('update', function (data) {
-         location.reload(); 
+    socket.on("update", function (data) {
+        socket.emit("parse",data);
     });
+
+    socket.on("parsed",function(data){
+        console.log("DATA REC");
+        console.log(data);
+        data = $(data).css('display','none');
+        $('body').prepend(data);
+        $('.chat').first().slideDown(200); 
+    });
+        
+    
   | !{data}
