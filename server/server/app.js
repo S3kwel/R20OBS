@@ -42,7 +42,6 @@ app.use('/', routes);
 app.use('/users', users);
 
 io.on('connection', function (socket) {
-    console.log(Object.keys(app));
     console.log('client connected.');
 
     socket.on('parse', function (data) {

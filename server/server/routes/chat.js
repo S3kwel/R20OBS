@@ -17,60 +17,35 @@ else{
     fs.copyFileSync(templateDB,dbpath); 
     console.log("created."); 
 }
-
-//':memory:' appears to assign the db to memory.  
 var db = new sqlite3.Database(dbpath);
 
-//Accepts the rendered output and passes it to the chat page.
-function renderHandler(err,html){
-    request.post({ headers: {'content-type' : 'text/plain'}
-        , url: `http://localhost:${process.env.PORT}/render`, body: html }
-               , function(error, response, body){
-                //console.log(body); 
-    }); 
-        
-   
-    
-}
-
-//To pass just the JSON
+/**
+ * Adds a json object to the database.
+ * @param {object} data a JSON object corresponding to the fields you wish to insert into.  
+ */
 function addChat(data){
     console.log("ADDCHAT"); 
-    request.post({ headers: {'content-type' : 'application/json'}
+    request.post({
+        headers: { 'content-type': 'application/json' }
         , url: `http://localhost:${process.env.PORT}/render`, body: JSON.stringify(data) }
                , function(error, response, body){
                 //console.log(body); 
-    }); 
-        
-   
-    
+    });  
 }
-
-
-//data.body should have an html string of the message to add.  
-//Add this information to a database, have the 'get' version of this page render upon an update? 
-//Postgres via express? 
+/**
+ * 
+ * @param {any} data
+ * @param {any} res
+ * @param {any} app
+ */
 function addMessage(data,res,app){
+    //Make sure data is the body of the request. 
     data = data.body; 
-    console.log(data);
-    /*TODO
-     * See Roll Templates to Integrate.txt for elements to pull data from.
-     * This will probably need re-facotring. 
-     * */
 
+    switch (data.type) {
 
+    }
 
-    //console.log(escape(data.content));
-    //Text chat.
-   // console.log(data); 
-
-    /*
-     * SQLITE3 apparently throws the last added row to a variable.
-     * Exploit that to render new messages from the client.  
-     * https://github.com/mapbox/node-sqlite3/wiki/API#databasepreparesql-param--callback
-     * 
-     * See the shit you hurriedly typed into the function below. 
-     * */
     if (typeof data.result == 'undefined') {
         var ins = db.prepare(`INSERT INTO chats(date,chatid,avatar,content,by) VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${escape(data.content)}","${data.by}")`);
         ins.run(function () {
@@ -87,26 +62,11 @@ function addMessage(data,res,app){
 
         
     }
-    //Rolls
-    else {
-        var ins = db.prepare(`INSERT INTO chats (date,chatid,avatar,by,formula,result) VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${data.by}","${data.formula}","${data.result}")`);
-        ins.run(function () {
-            this.lastID;
-            db.get(`SELECT * FROM chats WHERE rowid=${this.lastID}`, function (err, row) {
-                app.io.emit("update", row);
-            });
-        });
-        ins.finalize();
 
-        db.each('SELECT rowid AS id, * FROM chats ORDER BY id DESC LIMIT 1;', function (err, row) {
-            console.log(`${row.formula}/${row.result}, from ${row.by}`)
-        }); 
-
-        
-    }
+}
     
    
-}
+
 
 
 //NOTE:  Giving a callback to res.render interrupts the standard output. 

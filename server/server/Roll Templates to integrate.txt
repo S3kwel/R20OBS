@@ -1,92 +1,67 @@
-<!-- WITHOUT ADVANTAGE -- >
-<div class="sheet-container">
+***MESSAGES WITH IDENTIFYING INFORMATION
+- Messages with identifying information have children.  
+	- .avatar
+	- .tstamp
+	- .by
+
+This data should always be pulled:
+- Message ID from parent.
+- Avatar URL from parent->children->.avatar->img.src
+- Timestamp from parent->children->.tstamp->innerHTML 
+- By from parent->children->.by->innerHTML
+
+****TEXT MESSAGES
+IDENTIFY:
+	-.message general.  
+
+Similarities: 
+- Both are divs of class message general.  
+- The text of the message is the parent's outerhtml.  
+
+DATA TO COLLECT
+- Content from parent->html 
+
+
+****ROLL RESULTS
+// Output in response to /roll command.
+Identifying features:
+- class .message.rollresult
+
+Data to collect:
+- Formula from parent->children->formula->innerHTML
+- Result from parent->children->.rolled.ui-draggable->innerHTML
+
+
+****ATTACKS
+IDENTIFYING INFORMATION
+- Parent->first child has class of  .sheet-rolltemplate-atk
+
+DIFFERENCES
+- With advantage: parent->.sheet-rolltemplate-atk->child->child->child is '.sheet-solo'
+- Without advantage: parent->.sheet-rolltemplate-atk->child->child->child is 'sheet-adv'
+
+DATA TO PULL
+- WITH ADVATNAGE: 
+	- ROLL1: First child of first sheet.adv's text.
+	- ROLL2: First child of second sheet.adv's text. 
+	- SUBLABLEL: First child of .sheet-sublabel's text. 
+	- ATTACK NAME: First child of .sheet-label's text. 
+- WITHOUT ADVANTAGE:
+	- ROLL1: .sheet-solo's child's text. 
+	- SUBLABLEL: First child of .sheet-sublabel's text. 
+	- ATTACK NAME: First child of .sheet-label's text. 
+
+- DESCRIPTIONS: Child of .sheet-desc (IF PRESENT) 
+
+
+****DAMANGE
+<div class="message general you" data-messageid="-LiyY-l9-xe2sWY8GQDK"><div class="sheet-rolltemplate-dmg">
+        <div class="sheet-container sheet-damagetemplate">
             <div class="sheet-result">
-                    <div class="sheet-solo">
-                        <span><span class="inlinerollresult showtip tipsy-n-right" original-title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 1d20cs>20 + 2[PROF] = (<span class=&quot;basicdiceroll&quot;>19</span>)+2">21</span></span>
-                    </div>
-            </div>
-                <div class="sheet-sublabel">
-                    <span>150/600</span>
-                </div>
-            <div class="sheet-label">
-                    
-                    <span><a href="~-LisWM-i0pJ1VS6e0ORz|repeating_attack_-LisYo8fySkI2JlqOFj3_attack_dmg">Longbow</a> <span>(+2)</span></span>
-            </div>
-        </div>
-
-
-<!-- WITH ADVANTAGE--> 
-<div class="sheet-container">
-            <div class="sheet-result">
-                    <div class="sheet-adv">
-                        <span><span class="inlinerollresult showtip tipsy-n-right" original-title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 1d20cs>20 + 2[PROF] = (<span class=&quot;basicdiceroll&quot;>19</span>)+2">21</span></span>
-                    </div>
-                    <div class="sheet-advspacer"></div>
-                    <div class="sheet-adv">
-                        <span><span class="inlinerollresult showtip tipsy-n-right" original-title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 1d20cs>20 + 2[PROF] = (<span class=&quot;basicdiceroll&quot;>2</span>)+2">4</span></span>
-                    </div>
-            </div>
-                <div class="sheet-sublabel">
-                    <span>150/600</span>
-                </div>
-            <div class="sheet-label">
-                    
-                    
-                    
-                    <span><a href="~-LisWM-i0pJ1VS6e0ORz|repeating_attack_-LisYo8fySkI2JlqOFj3_attack_dmg">Longbow</a> <span>(+2)</span></span>
-            </div>
-        </div>
-
-<!-- DAMAGE ROLL -->
-<div class="sheet-result">
                         <div class="sheet-solo">
-                            <span class="sheet-damage"><span class="inlinerollresult showtip tipsy-n-right fullcrit" title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 1d8 = (<span class=&quot;basicdiceroll critsuccess &quot;>8</span>)">8</span></span>
+                            <span class="sheet-damage"><span class="inlinerollresult showtip tipsy-n-right" original-title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 1d8 = (<span class=&quot;basicdiceroll&quot;>3</span>)">3</span></span>
                             <span class="sheet-sublabel">Piercing</span>
                         </div>
             </div>
-
-
-<!-- DESCRIPTION -->
-<div class="sheet-desc sheet-info">
-                <span>
-                    <span class="sheet-top"></span><span class="sheet-middle">THIS IS A DESCRIPTIONJ</span><span class="sheet-bottom"></span>
-                </span>
-            </div>
-
-<!-- NON ATTACK SPELL --> 
-<div class="sheet-container">
-            <div class="sheet-title sheet-row">
-                <span>Light</span>
-            </div>
-            <div class="sheet-italics sheet-row">
-                <span>evocation cantrip</span>
-            </div>
-            <div class="sheet-spacer"></div>
-            <div class="sheet-row">
-                <span class="sheet-bold" data-i18n="casting-time:">Casting Time:</span> <span>1 action</span>
-            </div>
-            <div class="sheet-row">
-                <span class="sheet-bold" data-i18n="range:">Range:</span> <span>Touch</span>
-            </div>
-            <div class="sheet-row">
-                <span class="sheet-bold" data-i18n="target:">Target:</span> <span>One object that is no larger than 10 feet in any dimension</span>
-            </div>
-            <div class="sheet-row">
-                <span class="sheet-bold" data-i18n="components:">Components:</span>
-                <span>
-                    V, 
-                    
-                    M (A firefly or phosphorescent moss)
-                </span>
-            </div>
-            <div class="sheet-row">
-                <span class="sheet-bold" data-i18n="duration:">Duration:</span> <span>1 hour</span>
-            </div>
-            <div class="sheet-spacer"></div>
-            <div class="sheet-row">
-                <span class="sheet-description">You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action. If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</span>
-            </div>
         </div>
-
-<!-- EMOTE -- > 
-<div class="message emote" data-messageid="-LisqS46bqY_zK6tjmWw"><div class="avatar" aria-hidden="true"><img src="/users/avatar/1233891/30"></div><div class="spacer"></div>Dustin (GM) test</div>
+    </div></div>
