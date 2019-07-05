@@ -1,0 +1,5 @@
+<div class="message general you" data-messageid="{{message_id}}">
+   <div class="spacer"></div>
+   <div class="avatar" aria-hidden="false"><img src="{{avatar_src}}"></div>
+   <span class="tstamp" aria-hidden="true">4:12PM</span><span class="by">{{message_by}}</span>{{message_content}}
+</div>

@@ -1,0 +1,11 @@
+﻿block content 
+    - var d = unescape(description) != 'null' ? unescape(description) : ''
+    script.
+    .chat(data-messageid = `${id}`).attack
+        .spacer
+        .contentBox
+            .content 
+                .rollFormula <span class='chatName'>#{by}</span> attacks with <span class='rFormula'>#{label}</span>... #{result} !
+                .details 
+                    .row #{formula} | #{sublabel}
+                    .row.description #{d}

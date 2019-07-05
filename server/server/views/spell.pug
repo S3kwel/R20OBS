@@ -1,0 +1,10 @@
+﻿block content 
+    - var d = unescape(description) != 'null' ? unescape(description) : ''
+    - var n = name; 
+    .chat(data-messageid = `${id}`).spell
+        .spacer
+        .contentBox
+            .content <span class='chatName'>#{by}</span> casts <span class='spellName'>#{n}</span>! <br> #{d}  
+                 
+                //.row.det #{castingtime} | #{range} | #{target} | #{duration}
+                

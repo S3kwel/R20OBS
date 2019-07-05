@@ -48,12 +48,13 @@ a {
     justify-self: flex-start;    
 }
 .spacer {
-    width: 100px; 
+    width: 100px !important; 
 }
 .content{
     padding: 10px;
     font-size: 16pt; 
     font-weight: bold; 
+    border: 1px solid red;
 }
 
 .rollFormula {
@@ -65,7 +66,6 @@ a {
 }
 
 .rollResult {
-    color: red;
     font-family: 'Vecna';
 }
 .chatName {
@@ -73,4 +73,59 @@ a {
     color: green;
     font-family: 'Vecna';
     margin-right: 5px; 
+}
+
+.crit-true{
+    color: green;
+    font-size: 22pt; 
+}
+
+.fail-true {
+    color: red;
+    font-size: 22pt;
+}
+.aName {
+    font-family: 'Vecna';
+}
+.attack {
+    background: linear-gradient( rgba(245, 182, 66, 0.37), rgba(245, 182, 66, 0.37) ), url(/images/message-bg2.jpg);
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.damage {
+    background: linear-gradient( rgb(240, 17, 73, 0.37), rgb(240, 17, 73, 0.37) ), url(/images/message-bg2.jpg);
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.spell {
+    background: linear-gradient( rgba(81, 176, 114,0.37), rgba(81, 176, 114,0.37) ), url(/images/message-bg2.jpg);
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.details{
+
+}
+
+
+.details .row{
+    font-size: 65%; 
+}
+.details .description {
+    font-size: 60%;
+    color: grey; 
+}
+
+.description.spell{
+    color:white; 
+}
+
+.spellName{
+    color: green;
+    font-family: Vecna; 
 }

@@ -42,8 +42,11 @@
     <Content Include="package.json" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="README.md" />
+    <Content Include="views\spell.pug" />
+    <Content Include="views\damage.pug" />
     <Content Include="views\roll.pug" />
-    <Content Include="views\chat.pug" />
+    <Content Include="views\attack.pug" />
+    <Content Include="views\text.pug" />
     <Content Include="views\chatBox.pug" />
     <Content Include="views\index.pug" />
     <Content Include="views\layout.pug" />

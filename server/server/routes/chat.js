@@ -25,11 +25,12 @@ var db = new sqlite3.Database(dbpath);
  */
 function addChat(data){
     console.log("ADDCHAT"); 
+
     request.post({
         headers: { 'content-type': 'application/json' }
         , url: `http://localhost:${process.env.PORT}/render`, body: JSON.stringify(data) }
                , function(error, response, body){
-                //console.log(body); 
+                   console.log(body); 
     });  
 }
 /**
@@ -42,27 +43,75 @@ function addMessage(data,res,app){
     //Make sure data is the body of the request. 
     data = data.body; 
 
+    console.log(data); 
+
+    //All queries should have this information at least.
+    let cols = ['date', 'avatar', 'messageid', 'timestamp', 'by'];
+
+    console.log("incoming", data.type, "...."); 
+
     switch (data.type) {
-
+        case "roll":
+            cols.push('type','formula', 'result', 'crit', 'fail'); 
+            break;
+        case "text":
+            cols.push('type','content');
+            break;
+        case "attack":
+            cols.push('type','result', 'formula', 'sublabel', 'label', 'advantage', 'description');
+            break;
+        case "damage":
+            cols.push('type','result', 'formula', 'sublabel');
+            break;
+        case "spell":
+            cols.push('name', 'type','castingtime', 'range', 'target', 'components', 'duration', 'description'); 
+            break; 
     }
 
-    if (typeof data.result == 'undefined') {
-        var ins = db.prepare(`INSERT INTO chats(date,chatid,avatar,content,by) VALUES (CURRENT_TIMESTAMP,"${data.id}","${data.avatar}","${escape(data.content)}","${data.by}")`);
-        ins.run(function () {
-            this.lastID;
-            db.get(`SELECT * FROM chats WHERE rowid=${this.lastID}`, function (err,row) {
-                app.io.emit("update", row,); 
-            });
-        });
-        ins.finalize();
-
-        db.each('SELECT rowid AS id, * FROM chats ORDER BY id DESC LIMIT 1;', function (err, row) {
-            console.log(`Added message "${row.content}", from ${row.by}`)
-        });
-
-        
+    //BUILD THE QUERY
+    let v;
+    let query = `INSERT INTO chat(`;
+    for (let c of cols) {
+        //Date is the one column that breaks the genreal rule. 
+        query += `${c},`       
     }
 
+    query = query.substring(0, query.length - 1); 
+    query += ') VALUES(';
+
+    for (let c of cols) {
+        if (c == "date") {
+            v = 'CURRENT_TIMESTAMP';
+        }
+        else if (c == 'description' || c == 'content') {
+            v = escape(data[c]); 
+        }
+
+        else {
+            v = data[c];
+        }
+        query += `"${v}",`;
+    }
+
+    query = query.substring(0, query.length - 1); 
+    query += `)`; 
+
+    //Prepare/run the query.  'Update' chat with the new data.  
+    var ins = db.prepare(query);
+    ins.run(function () {
+        db.get(`SELECT * FROM chat WHERE rowid=${this.lastID}`, function (err, row) {
+            app.io.emit("update", row);
+        });
+    });
+
+    ins.finalize();
+
+    db.each('SELECT rowid AS id, * FROM chat ORDER BY id DESC LIMIT 1;', function (err, row) {
+        console.log(`Added ${row.type}, from ${row.by}`)
+    });
+
+    //RESET COLS
+    cols = ['date', 'avatar', 'messageid', 'timestamp', 'by'];
 }
     
    
@@ -83,22 +132,20 @@ function getData(res) {
     var htmlData = ''; 
     console.log("Pulling the last 100 messages from chat!"); 
     return new Promise((resolve, reject) => {
-        db.all("SELECT * FROM chats ORDER BY rowid DESC", [], (err, rows) => {
+        db.all("SELECT * FROM chat ORDER BY rowid DESC", [], (err, rows) => {
             rows.forEach((row) => {
-                //console.log(row.content); 
-                if (row.content != null) {
-                    row.content = unescape(row.content);
-                    res.render('chat', row, function (err, html) {
-                        //console.log(row);
-                        htmlData += html;
+                res.render(row.type, row, function (err, html) { 
+                    if (typeof html != 'undefined') {
+                        console.log(row); 
+                        console.log("ADDED ", html); 
+                            htmlData += html;
+                        }
+                        else {
+                            console.log(`Skipping ${row.type} due to a lack of a template!`); 
+                        }
+                        
                     });
-                }
-                else {
-                    res.render('roll', row, function (err, html) {
-                        html = html.replace(/(^,)|(,$)/g, "")
-                        htmlData += html;
-                    });
-                }
+                
             });
             resolve(htmlData); 
         });

@@ -1,0 +1,11 @@
+﻿block content 
+    - var d = unescape(description) != 'null' ? unescape(description) : ''
+    script.
+    .chat(data-messageid = `${id}`).damage
+        .spacer
+        .contentBox
+            .content 
+                .rollFormula <span class='chatName'>#{by}</span> rolls for damage... #{result}  #{sublabel}!
+                .details 
+                    .row #{formula} | #{sublabel}
+                    .row.description #{d}
