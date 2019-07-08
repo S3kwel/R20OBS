@@ -15,7 +15,7 @@ a {
     background: linear-gradient( rgba(199, 138, 5, 0.28), rgba(199, 138, 5, 0.28)), url(/images/message-bg2.jpg);
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100%; 
     box-shadow: inset 0px 0px 60px -2px rgba(0,0,0,1);
     box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.46);
 }
@@ -27,17 +27,118 @@ a {
 }
 img.avatar {
     width: 100%;
-    background-image: url(/images/message-bg.jpg);
-    background-size: 100% 100%; 
-    border-right: 5px solid black; 
+    max-width: initial; 
+    max-height: initial; 
+    background-size: 100% 100%;
+    background-color: #ebd6a9;
+    border-right: 2px solid black;
 }
 .space{
     margin-top: 20px;
     margin-bottom: 20px; 
 }
+.attackspace{
+    margin-top: 20px; 
+    margin-bottom: -15px; 
+}
+.spacer{
+    background: none; 
+    background-color: transparent; 
+}
 .text{
     word-wrap: break-word; 
-    padding: 5px;
-    font-size: 18pt; 
+    padding: 10px;
+    font-size: 14pt; 
     font-family: Verdana; 
+}
+
+.roller, .formula {
+    font-family: Vecna;
+    font-weight: bold;
+    font-size: larger; 
+}
+.rollcol{
+    background-size: cover; 
+    text-align: center; 
+}
+.result, .attackname{
+    display: inline-block;
+    font-family: Vecna; 
+    padding: 5px; 
+    text-align: center; 
+
+}
+
+.crit, .fail {
+    font-weight: bold;
+    font-size: larger;
+    color: white;
+    border: 1px solid black;
+}
+
+.crit {
+    background-color: rgba(0, 255, 36, 0.30);
+}
+.fail {
+    background-color: rgba(255, 0, 0, 0.30);
+}
+.normal {
+    font-weight: bold !important;
+    background-color: rgba(255, 255, 255, 0.30);
+    border: 1px solid black;
+}
+.gm{
+    color: red; 
+}
+
+.attackname{
+    font-weight: bold !important; 
+}
+.col.attack {
+    background-image: linear-gradient(#e8c992,#e8ad43);
+    border: 1px solid black;
+    border-top: none;
+    margin-bottom: 15px;
+}
+.col.spell, .col.spelldescription {
+    background-image: linear-gradient(#c8c8c8,#969696);
+    border: 1px solid black;
+    border-top: none;
+    margin-bottom: 15px;
+    border-right: none; 
+}
+
+.attack .text{
+    font-family: Vecna !important; 
+    font-weight: bold !important;
+}
+.formula {
+    border: 1px solid black;
+    background-color: rgba(147, 147, 147, 0.30);
+    padding-left: 5px;
+    padding-right: 5px; 
+    word-wrap: break-word; 
+}
+.spell .formula{
+}
+.description{
+    margin-left: 26px; 
+    font-size: smaller; 
+}
+.spellinfo {
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 1px solid black;
+    padding: 5px !important;
+}
+.spelldescription{
+    border-right: 0; 
+    padding: 5px !important; 
+    font-family: Verdana; 
+    font-size: 12pt; 
+}
+.spellinfo:nth-child(2){
+    font-family: Verdana; 
+    font-size: 10pt; 
 }

@@ -1,10 +1,34 @@
-﻿block content 
+﻿block content
     - var d = unescape(description) != 'null' ? unescape(description) : ''
-    - var n = name; 
-    .chat(data-messageid = `${id}`).spell
-        .spacer
-        .contentBox
-            .content <span class='chatName'>#{by}</span> casts <span class='spellName'>#{n}</span>! <br> #{d}  
-                 
-                //.row.det #{castingtime} | #{range} | #{target} | #{duration}
-                
+    - var c = (crit == true) ? 'crit':'';
+    - var f = (fail ==  true) ? 'fail':''; 
+    - var n = (fail != true && crit != true) ? 'normal':'';
+    - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
+    .container-fluid.attackspace
+        .row.no-gutters.block
+            .col-1.col-sm-1.col-lg-1.speakingas.spacer
+                .row
+                    .col-12
+            .col
+                .text <span class='roller #{g}'>#{by}</span> casts <span class = 'attackname'>#{name}</span>!
+                //rolls <span class='formula'>#{formula}</span>...and gets a <span class='result #{c} #{f} #{n}'>#{result}</span>!
+        .row.no-gutters.attack
+            .col.spelldescription 
+                .row.no-gutters
+                    p #{d}
+            .col.col-lg-3.spell
+               .row.no-gutters
+                   .col.spellinfo CASTING TIME:
+                   .col.spellinfo #{castingtime}
+               .row.no-gutters
+                   .col.spellinfo RANGE:
+                   .col.spellinfo #{range}
+               .row.no-gutters
+                   .col.spellinfo TARGET:
+                   .col.spellinfo #{target}
+               .row.no-gutters
+                   .col.spellinfo COMPONENTS:
+                   .col.spellinfo #{components}
+               .row.no-gutters
+                   .col.spellinfo DURATION:
+                   .col.spellinfo #{duration}

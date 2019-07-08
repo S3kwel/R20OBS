@@ -1,14 +1,14 @@
 ﻿block content
     - var d = unescape(content) != 'null' ? unescape(content) : ''
+    - var c = (crit != 'undefined') ? 'crit':'';
+    - var f = (fail != 'undefined') ? 'fail':''; 
+    - var n = (fail == 'undefined' && crit == 'undefined') ? 'normal':'';
+    - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
     .container-fluid.space
         .row.no-gutters.block
-            .col-1.speakingas
-                .row
-                    .col-12 #{by}
+            .col-2.col-sm-1.col-lg-1.speakingas.spacer
                 .row
                     .col-12
-                        img.avatar(src=`${avatar}`)
-            .col-11
-                .row.no-gutters
-                .text #{formula}
+            .col
+                .text <span class='roller #{g}'>#{by}</span> rolls <span class='formula'>#{formula}</span>...and gets a <span class='result #{c} #{f} #{n}'>#{result}</span>!
                

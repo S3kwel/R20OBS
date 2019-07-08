@@ -1,11 +1,18 @@
-﻿block content 
+﻿block content
     - var d = unescape(description) != 'null' ? unescape(description) : ''
-    script.
-    .chat(data-messageid = `${id}`).attack
-        .spacer
-        .contentBox
-            .content 
-                .rollFormula <span class='chatName'>#{by}</span> attacks with <span class='rFormula'>#{label}</span>... #{result} !
-                .details 
-                    .row #{formula} | #{sublabel}
-                    .row.description #{d}
+    - var c = (crit == true) ? 'crit':'';
+    - var f = (fail ==  true) ? 'fail':''; 
+    - var n = (fail != true && crit != true) ? 'normal':'';
+    - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
+    .container-fluid.attackspace
+        .row.no-gutters.block
+            .col-1.col-sm-1.col-lg-1.speakingas.spacer
+                .row
+                    .col-12
+            .col
+                .text <span class='roller #{g}'>#{by}</span> attacks with <span class = 'attackname'>#{label} | #{sublabel}</span>
+                //rolls <span class='formula'>#{formula}</span>...and gets a <span class='result #{c} #{f} #{n}'>#{result}</span>!
+        .row.no-gutters.attack
+            .col-1
+            .col.attack
+                .text ATTACK: <span class='result #{c} #{f} #{n}'>#{result} #{f}</span> <span class='formula'>#{formula}</span> <br> <span class='description'>#{d}</span> 

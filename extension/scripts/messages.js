@@ -77,7 +77,7 @@ $(async function () {
                     if (childClass.indexOf('rollresult') != -1) {
                         log("ROLL COMMAND");
                         r['type'] = 'roll'; 
-                        r['formula'] = $(msg).children('.formula').html();
+                        r['formula'] = $(msg).children('.formula').html().toLowerCase().replace('rolling', '');
                         r['result'] = $(msg).children('.rolled').html(); 
 
                         if ($(msg).children().find('.critsuccess').length != 0) {
