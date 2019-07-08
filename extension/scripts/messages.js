@@ -52,7 +52,7 @@ $(async function () {
                 while (IDINFO_FOUND == false);
                
                 //Populate the return with IDINFO data. 
-                r['avatar'] = $(IDINFO_MSG).find('.avatar').find('img').attr('src'); 
+                r['avatar'] = `http://app.roll20.net` + $(IDINFO_MSG).find('.avatar').find('img').attr('src'); 
                 r['messageid'] = $(IDINFO_MSG).data('messageid'); 
                 r['timestamp'] = $(IDINFO_MSG).children('.tstamp').html(); 
                 r['by'] = $(IDINFO_MSG).children('.by').html();

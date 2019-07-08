@@ -1,6 +1,14 @@
-﻿block content 
-    .chat(data-messageid = `${id}`)
-        .spacer
-        .contentBox
-            .content 
-                .rollFormula <span class='chatName'>#{by}</span> is <span class='rFormula'>#{formula}</span>... <span class="rollResult crit-#{crit} fail-#{fail}">#{result}</span>!
+﻿block content
+    - var d = unescape(content) != 'null' ? unescape(content) : ''
+    .container-fluid.space
+        .row.no-gutters.block
+            .col-1.speakingas
+                .row
+                    .col-12 #{by}
+                .row
+                    .col-12
+                        img.avatar(src=`${avatar}`)
+            .col-11
+                .row.no-gutters
+                .text #{formula}
+               

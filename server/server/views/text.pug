@@ -1,7 +1,14 @@
 ﻿block content
-    .chat(data-messageid = `${id}`)
-        .infoBox
-            .name #{by}
-            .avatar(style=`background-image: url(${avatar})`)
-        .contentBox
-            .content !{content}
+    - var d = unescape(content) != 'null' ? unescape(content) : ''
+    .container-fluid.space
+        .row.no-gutters.block
+            .col-1.speakingas
+                .row
+                    .col-12 #{by}
+                .row
+                    .col-12
+                        img.avatar(src=`${avatar}`)
+            .col-11
+                .row.no-gutters
+                .text #{d}
+               
