@@ -6,22 +6,32 @@
     - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
     .container-fluid.attackspace
         .row.no-gutters.block
-            .col-1.col-sm-1.col-lg-1.speakingas.spacer
+            .col-1.col-sm-1.col-lg-1.speakingas.spacer.icon
+                img(src='images/spell.png')
                 .row
                     .col-12
             .col
                 .col.text <span class='roller #{g}'>#{by}</span> casts <span class = 'attackname'>#{name}</span>!
                 //rolls <span class='formula'>#{formula}</span>...and gets a <span class='result #{c} #{f} #{n}'>#{result}</span>!
-        .row.no-gutters.attack
-            .col-1
-            .col-1.spellinfo
-                .container.blue
-                    .row.icon.duration
-                    .row test2
 
         .row.no-gutters.attack
             .col-1
-            .col.spelldescription 
-                p #{d}
+            .col.spelldescription #{d}
+        .row.no-gutters
+            .col-1
+            .col.spelldetails
+                .row.no-gutters
+                    .col.icon.time
+                    .col.icon.target
+                    .col.icon.duration
+                    .col.icon.components
+        .row.no-gutters
+            .col-1
+            .col.spelldetails
+                .row.no-gutters
+                    .col.spelldet #{castingtime}
+                    .col.spelldet  #{target}
+                    .col.spelldet  #{duration}
+                    .col.spelldet  #{components}
         
             

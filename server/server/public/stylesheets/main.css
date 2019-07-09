@@ -1,183 +1,376 @@
-﻿@font-face {
-    font-family: 'Vecna';
-    src: url('/fonts/Vecna.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+/* Single property */
+html {
+  font-size: 14px;
 }
-body {
-    font-family: Vecna !important; 
+@media (min-width: 320px) {
+  html {
+    font-size: calc(14px + 4 * (100vw - 320px) / 1046);
+  }
 }
-a {
-    color: #00B7FF;
-}
-.block {
-    border: 1px solid black;
-    background: linear-gradient( rgba(199, 138, 5, 0.28), rgba(199, 138, 5, 0.28)), url(/images/message-bg2.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 100%; 
-    box-shadow: inset 0px 0px 60px -2px rgba(0,0,0,1);
-    box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.46);
+@media (min-width: 1366px) {
+  html {
+    font-size: 18px;
+  }
 }
 
-.speakingas{
-    background-color: black; 
-    color: white; 
-    text-align: center; 
+/* Multiple properties with same values */
+h1 {
+  padding-bottom: 2em;
+  padding-top: 2em;
 }
+@media (min-width: 20em) {
+  h1 {
+    padding-bottom: calc(2em + 2 * (100vw - 20em) / 50);
+    padding-top: calc(2em + 2 * (100vw - 20em) / 50);
+  }
+}
+@media (min-width: 70em) {
+  h1 {
+    padding-bottom: 4em;
+    padding-top: 4em;
+  }
+}
+
+@font-face {
+  font-family: "Vecna";
+  src: url("/fonts/Vecna.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: Vecna !important;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.block {
+  border: 1px solid black;
+  background: linear-gradient(rgba(199, 138, 5, 0.28), rgba(199, 138, 5, 0.28)), url(/images/message-bg2.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  box-shadow: inset 0px 0px 60px -2px black;
+  box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.46);
+}
+
+.speakingas {
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
 img.avatar {
-    width: 100%;
-    max-width: initial; 
-    max-height: initial; 
-    background-size: 100% 100%;
-    background-color: #ebd6a9;
-    border-right: 2px solid black;
+  width: 100%;
+  max-width: initial;
+  max-height: initial;
+  background-size: 100% 100%;
+  background-color: #ebd6a9;
+  border-right: 2px solid black;
 }
-.space{
-    margin-top: 20px;
-    margin-bottom: 20px; 
+
+.space {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-.attackspace{
-    margin-top: 20px; 
-    margin-bottom: -15px; 
+
+.attackspace {
+  margin-top: 20px;
+  margin-bottom: -15px;
 }
-.spacer{
-    background: none; 
-    background-color: transparent; 
+
+.spacer {
+  background: none;
+  background-color: transparent;
 }
-.text{
-    word-wrap: break-word; 
-    padding: 10px;
-    font-size: 14pt; 
-    font-family: Verdana; 
+
+.text {
+  word-wrap: break-word;
+  padding: 10px;
+  font-size: 12pt;
+  font-family: Verdana;
+}
+@media (min-width: 400px) {
+  .text {
+    font-size: calc(12pt + 12 * (100vw - 400px) / 1520);
+  }
+}
+@media (min-width: 1920px) {
+  .text {
+    font-size: 24pt;
+  }
 }
 
 .roller, .formula {
-    font-family: Vecna;
-    font-weight: bold;
-    font-size: larger; 
+  font-family: Vecna;
+  font-weight: bold;
+  font-size: larger;
 }
-.rollcol{
-    background-size: cover; 
-    text-align: center; 
-}
-.result, .attackname{
-    display: inline-block;
-    font-family: Vecna; 
-    padding: 5px; 
-    text-align: center; 
 
+.rollcol {
+  background-size: cover;
+  text-align: center;
+}
+
+.result, .attackname {
+  display: inline-block;
+  font-family: Vecna;
+  padding: 5px;
+  text-align: center;
 }
 
 .crit, .fail {
-    font-weight: bold;
-    font-size: larger;
-    color: white;
-    border: 1px solid black;
+  font-weight: bold;
+  font-size: larger;
+  color: white;
+  border: 1px solid black;
 }
 
 .crit {
-    background-color: rgba(0, 255, 36, 0.30);
+  background-color: rgba(0, 255, 36, 0.3);
 }
+
 .fail {
-    background-color: rgba(255, 0, 0, 0.30);
+  background-color: rgba(255, 0, 0, 0.3);
 }
+
 .normal {
-    font-weight: bold !important;
-    background-color: rgba(255, 255, 255, 0.30);
-    border: 1px solid black;
-}
-.gm{
-    color: red; 
+  font-weight: bold !important;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid black;
 }
 
-.attackname{
-    font-weight: bold !important; 
+.gm {
+  color: red;
 }
+
+.attackname {
+  font-weight: bold !important;
+}
+
 .col.attack {
-    background-image: linear-gradient(#e8c992,#e8ad43);
-    border: 1px solid black;
-    border-top: none;
-    margin-bottom: 15px;
+  background-image: linear-gradient(#e8c992, #e8ad43);
+  border: 1px solid black;
+  border-top: none;
+  margin-bottom: 15px;
 }
+
 .col.spell, .col.spelldescription {
-    background-image: linear-gradient(#c8c8c8,#969696);
-    border: 1px solid black;
-    border-top: none;
-    margin-bottom: 15px;
+  background-image: linear-gradient(#c8c8c8, #969696);
+  border: 1px solid black;
+  border-top: none;
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+@media (min-width: 400px) {
+  .col.spell, .col.spelldescription {
+    font-size: calc(12px + 12 * (100vw - 400px) / 1520);
+  }
+}
+@media (min-width: 1920px) {
+  .col.spell, .col.spelldescription {
+    font-size: 24px;
+  }
 }
 
-.attack .text{
-    font-family: Vecna !important; 
-    font-weight: bold !important;
+.col.spelldetails {
+  font-size: 12px;
+  border: 1px solid black;
+  border-top: none;
+  background-color: #969696;
+  margin-top: -15px;
+  font-family: Verdana;
+  margin-bottom: 15px;
 }
+@media (min-width: 400px) {
+  .col.spelldetails {
+    font-size: calc(12px + 12 * (100vw - 400px) / 1520);
+  }
+}
+@media (min-width: 1920px) {
+  .col.spelldetails {
+    font-size: 24px;
+  }
+}
+
+.attack .text {
+  font-family: Vecna !important;
+  font-weight: bold !important;
+}
+
 .formula {
-    border: 1px solid black;
-    background-color: rgba(147, 147, 147, 0.30);
-    padding-left: 5px;
-    padding-right: 5px; 
-    word-wrap: break-word; 
-}
-.spell .formula{
-}
-.description{
-    margin-left: 26px; 
-    font-size: smaller; 
-}
-.spellinfo {
-    width: 100%;
-    font-weight: bold;
-    font-size: 16px;
-    border-bottom: 1px solid black;
-    padding: 5px !important;
-}
-.spelldescription{
-    padding: 5px !important; 
-    font-family: Verdana; 
-    font-size: 12pt; 
-}
-.spellinfo:nth-child(2){
-    font-family: Verdana; 
-    font-size: 10pt; 
-}
-.spellinfo{
-    border: 1px solid black; 
+  border: 1px solid black;
+  background-color: rgba(147, 147, 147, 0.3);
+  padding-left: 5px;
+  padding-right: 5px;
+  word-wrap: break-word;
 }
 
-.time{
-    background-image: url(/images/time.png); 
+.description {
+  margin-left: 26px;
+  font-size: smaller;
 }
+
+.spellinfo {
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+  border-bottom: 1px solid black;
+  padding: 5px !important;
+}
+
+.spelldescription {
+  padding: 5px !important;
+  font-family: Verdana;
+  font-size: 12pt;
+}
+
+.spellinfo:nth-child(2) {
+  font-family: Verdana;
+  font-size: 10pt;
+}
+
+.spellinfo {
+  border: 1px solid black;
+}
+
+.time {
+  background-image: url(/images/time.png);
+}
+
 .duration {
-    background-image: url(/images/duration.png);
+  background-image: url(/images/duration.png);
 }
+
 .target {
-    background-image: url(/images/target.png);
+  background-image: url(/images/target.png);
 }
+
 .components {
-    background-image: url(/images/components.png);
+  background-image: url(/images/components.png);
 }
-.spellicon {
-    background-image: url(/images/Spell.png);
+
+.spell {
+  background-image: url(/images/spell.png);
 }
+
 .somatic {
-    background-image: url(/images/somatic.png);
+  background-image: url(/images/somatic.png);
 }
+
 .material {
-    background-image: url(/images/material.png);
+  background-image: url(/images/material.png);
 }
+
 .verbal {
-    background-image: url(/images/verbal.png);
+  background-image: url(/images/verbal.png);
 }
-.attackicon {
-    background-image: url(/images/attack.png);
+
+.attack {
+  background-image: url(/images/attack.png);
 }
-.icon{
+
+.spacer.icon img {
+  position: relative;
+  width: 100%;
+  width: 140%;
+  height: 50px;
+  border: 1px solid black;
+  left: -1px;
+  top: -1px;
+  background-image: linear-gradient(#c8c8c8, #969696);
+  z-index: 10;
+}
+@media (min-width: 400px) {
+  .spacer.icon img {
+    width: calc(140% + -40 * (100vw - 400px) / 800);
+  }
+}
+@media (min-width: 1200px) {
+  .spacer.icon img {
     width: 100%;
-    background-size: cover; 
-    background-repeat: no-repeat;
-    background-position: center center; 
-    border: 1px solid red; 
+  }
 }
-.blue{
-    border: 1px solid blue; 
+@media (min-width: 400px) {
+  .spacer.icon img {
+    height: calc(50px + 100 * (100vw - 400px) / 1520);
+  }
 }
+@media (min-width: 1920px) {
+  .spacer.icon img {
+    height: 150px;
+  }
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-right: 1px solid black;
+}
+@media (min-width: 400px) {
+  .icon {
+    width: calc(25px + 25 * (100vw - 400px) / 1520);
+  }
+}
+@media (min-width: 1920px) {
+  .icon {
+    width: 50px;
+  }
+}
+@media (min-width: 400px) {
+  .icon {
+    height: calc(25px + 25 * (100vw - 400px) / 1520);
+  }
+}
+@media (min-width: 1920px) {
+  .icon {
+    height: 50px;
+  }
+}
+
+.col.spelldetails:last-child {
+  border-right: none;
+}
+
+.blue {
+  border: 1px solid blue;
+}
+
+.spellmetrics {
+  border: 1px solid red;
+}
+
+.col.spelldet {
+  text-align: center;
+  word-wrap: break-word;
+  border-right: 1px solid black;
+  width: 25px;
+  font-size: 8pt;
+  padding: 0 !important;
+}
+@media (min-width: 400px) {
+  .col.spelldet {
+    width: calc(25px + 25 * (100vw - 400px) / 1520);
+  }
+}
+@media (min-width: 1920px) {
+  .col.spelldet {
+    width: 50px;
+  }
+}
+@media (min-width: 400px) {
+  .col.spelldet {
+    font-size: calc(8pt + 4 * (100vw - 400px) / 800);
+  }
+}
+@media (min-width: 1200px) {
+  .col.spelldet {
+    font-size: 12pt;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
