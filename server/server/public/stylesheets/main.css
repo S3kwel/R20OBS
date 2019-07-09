@@ -105,7 +105,6 @@ img.avatar {
     border: 1px solid black;
     border-top: none;
     margin-bottom: 15px;
-    border-right: none; 
 }
 
 .attack .text{
@@ -133,7 +132,6 @@ img.avatar {
     padding: 5px !important;
 }
 .spelldescription{
-    border-right: 0; 
     padding: 5px !important; 
     font-family: Verdana; 
     font-size: 12pt; 
@@ -141,4 +139,45 @@ img.avatar {
 .spellinfo:nth-child(2){
     font-family: Verdana; 
     font-size: 10pt; 
+}
+.spellinfo{
+    border: 1px solid black; 
+}
+
+.time{
+    background-image: url(/images/time.png); 
+}
+.duration {
+    background-image: url(/images/duration.png);
+}
+.target {
+    background-image: url(/images/target.png);
+}
+.components {
+    background-image: url(/images/components.png);
+}
+.spellicon {
+    background-image: url(/images/Spell.png);
+}
+.somatic {
+    background-image: url(/images/somatic.png);
+}
+.material {
+    background-image: url(/images/material.png);
+}
+.verbal {
+    background-image: url(/images/verbal.png);
+}
+.attackicon {
+    background-image: url(/images/attack.png);
+}
+.icon{
+    width: 100%;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center; 
+    border: 1px solid red; 
+}
+.blue{
+    border: 1px solid blue; 
 }

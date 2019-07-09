@@ -10,25 +10,18 @@
                 .row
                     .col-12
             .col
-                .text <span class='roller #{g}'>#{by}</span> casts <span class = 'attackname'>#{name}</span>!
+                .col.text <span class='roller #{g}'>#{by}</span> casts <span class = 'attackname'>#{name}</span>!
                 //rolls <span class='formula'>#{formula}</span>...and gets a <span class='result #{c} #{f} #{n}'>#{result}</span>!
         .row.no-gutters.attack
+            .col-1
+            .col-1.spellinfo
+                .container.blue
+                    .row.icon.duration
+                    .row test2
+
+        .row.no-gutters.attack
+            .col-1
             .col.spelldescription 
-                .row.no-gutters
-                    p #{d}
-            .col.col-lg-3.spell
-               .row.no-gutters
-                   .col.spellinfo CASTING TIME:
-                   .col.spellinfo #{castingtime}
-               .row.no-gutters
-                   .col.spellinfo RANGE:
-                   .col.spellinfo #{range}
-               .row.no-gutters
-                   .col.spellinfo TARGET:
-                   .col.spellinfo #{target}
-               .row.no-gutters
-                   .col.spellinfo COMPONENTS:
-                   .col.spellinfo #{components}
-               .row.no-gutters
-                   .col.spellinfo DURATION:
-                   .col.spellinfo #{duration}
+                p #{d}
+        
+            
