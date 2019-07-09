@@ -163,7 +163,7 @@ $(async function () {
                         r['castingtime'] = element.find('span[data-i18n="casting-time:"]').next().text().trim(); 
                         r['range'] = element.find('span[data-i18n="range:"]').next().text().trim(); 
                         r['target'] = element.find('span[data-i18n="target:"]').next().text().trim(); 
-                        r['components'] = element.find('span[data-i18n="components:"]').next().text().trim().replace(/\s/g, '');
+                        r['components'] = element.find('span[data-i18n="components:"]').next().text().trim();
                         r['duration'] = element.find('span[data-i18n="duration:"]').next().text().trim(); 
                         r['description'] = element.find('.sheet-description').text().trim(); 
                     }
