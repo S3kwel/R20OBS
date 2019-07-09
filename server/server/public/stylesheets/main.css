@@ -105,7 +105,6 @@ img.avatar {
 .roller, .formula {
   font-family: Vecna;
   font-weight: bold;
-  font-size: larger;
 }
 
 .rollcol {
@@ -116,15 +115,25 @@ img.avatar {
 .result, .attackname {
   display: inline-block;
   font-family: Vecna;
-  padding: 5px;
   text-align: center;
+  padding: 0 !important;
 }
 
-.crit, .fail {
+.formula {
+  border: 1px solid black;
+  background-color: rgba(147, 147, 147, 0.3);
+  word-wrap: break-word;
+  padding: 0 !important;
+  width: initial !important;
+}
+
+.crit, .fail, .nor {
+  display: inline-block;
   font-weight: bold;
-  font-size: larger;
+  text-align: center;
   color: white;
   border: 1px solid black;
+  padding: 0 !important;
 }
 
 .crit {
@@ -135,10 +144,9 @@ img.avatar {
   background-color: rgba(255, 0, 0, 0.3);
 }
 
-.normal {
-  font-weight: bold !important;
+.nor {
   background-color: rgba(255, 255, 255, 0.3);
-  border: 1px solid black;
+  color: black;
 }
 
 .gm {
@@ -162,6 +170,7 @@ img.avatar {
   border-top: none;
   margin-bottom: 15px;
   font-size: 12px;
+  font-family: Verdana;
 }
 @media (min-width: 400px) {
   .col.spell, .col.spelldescription {
@@ -199,17 +208,21 @@ img.avatar {
   font-weight: bold !important;
 }
 
-.formula {
-  border: 1px solid black;
-  background-color: rgba(147, 147, 147, 0.3);
-  padding-left: 5px;
-  padding-right: 5px;
-  word-wrap: break-word;
-}
-
 .description {
-  margin-left: 26px;
-  font-size: smaller;
+  padding: 5px !important;
+  font-family: Verdana;
+  font-size: 12px;
+  font-weight: normal;
+}
+@media (min-width: 400px) {
+  .description {
+    font-size: calc(12px + 12 * (100vw - 400px) / 1520);
+  }
+}
+@media (min-width: 1920px) {
+  .description {
+    font-size: 24px;
+  }
 }
 
 .spellinfo {
@@ -218,12 +231,6 @@ img.avatar {
   font-size: 16px;
   border-bottom: 1px solid black;
   padding: 5px !important;
-}
-
-.spelldescription {
-  padding: 5px !important;
-  font-family: Verdana;
-  font-size: 12pt;
 }
 
 .spellinfo:nth-child(2) {
@@ -279,7 +286,6 @@ img.avatar {
   border: 1px solid black;
   left: -1px;
   top: -1px;
-  background-image: linear-gradient(#c8c8c8, #969696);
   z-index: 10;
 }
 @media (min-width: 400px) {
@@ -300,6 +306,40 @@ img.avatar {
 @media (min-width: 1920px) {
   .spacer.icon img {
     height: 150px;
+  }
+}
+
+.spacer.icon.attack img {
+  background-image: linear-gradient(#e8c992, #e8ad43);
+}
+
+.spacer.icon.spell img {
+  background-image: linear-gradient(#c8c8c8, #969696);
+}
+
+.spacer.icon.roll img {
+  background-image: linear-gradient(#0aff08, #289f0c);
+  width: 90%;
+  height: 50px;
+}
+@media (min-width: 400px) {
+  .spacer.icon.roll img {
+    width: calc(90% + -10 * (100vw - 400px) / 800);
+  }
+}
+@media (min-width: 1200px) {
+  .spacer.icon.roll img {
+    width: 80%;
+  }
+}
+@media (min-width: 400px) {
+  .spacer.icon.roll img {
+    height: calc(50px + 20 * (100vw - 400px) / 1520);
+  }
+}
+@media (min-width: 1920px) {
+  .spacer.icon.roll img {
+    height: 70px;
   }
 }
 

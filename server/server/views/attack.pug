@@ -2,17 +2,19 @@
     - var d = unescape(description) != 'null' ? unescape(description) : ''
     - var c = (crit == true) ? 'crit':'';
     - var f = (fail ==  true) ? 'fail':''; 
-    - var n = (fail != true && crit != true) ? 'normal':'';
+    - var n = (fail != true && crit != true) ? 'nor':'';
     - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
+    - var form = formula.replace(/\d+$/, "")
     .container-fluid.attackspace
         .row.no-gutters.block
-            .col-1.col-sm-1.col-lg-1.speakingas.spacer
+            .col-1.col-sm-1.col-lg-1.speakingas.spacer.icon.attack
+                img(src='images/attack.png')
                 .row
                     .col-12
             .col
                 .text <span class='roller #{g}'>#{by}</span> attacks with <span class = 'attackname'>#{label} | #{sublabel}</span>
-                //rolls <span class='formula'>#{formula}</span>...and gets a <span class='result #{c} #{f} #{n}'>#{result}</span>!
         .row.no-gutters.attack
             .col-1
             .col.attack
-                .text ATTACK: <span class='result #{c} #{f} #{n}'>#{result} #{f}</span> <span class='formula'>#{formula}</span> <br> <span class='description'>#{d}</span> 
+                .text #{form} <span class='result #{c} #{f} #{n}'>#{result}</span>
+                .text <span class='description'>#{d}</span> 
