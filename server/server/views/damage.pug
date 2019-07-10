@@ -1,11 +1,20 @@
-﻿block content 
+﻿block content
     - var d = unescape(description) != 'null' ? unescape(description) : ''
-    script.
-    .chat(data-messageid = `${id}`).damage
-        .spacer
-        .contentBox
-            .content 
-                .rollFormula <span class='chatName'>#{by}</span> rolls for damage... #{result}  #{sublabel}!
-                .details 
-                    .row #{formula} | #{sublabel}
-                    .row.description #{d}
+    - var c = (crit == true) ? 'crit':'';
+    - var f = (fail ==  true) ? 'fail':''; 
+    - var n = (fail != true && crit != true) ? 'nor':'';
+    - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
+    - var form = formula.replace(/\d+$/, "")
+    - var l = (label != 'null') ? label : 'false'
+    .container-fluid.attackspace
+        .row.no-gutters.block
+            .col-2.col-sm-1.col-lg-1.spacer
+                .icon.attack
+                .row
+                    .col-12
+            .col
+                .text <span class='roller #{g}'>#{by}</span> rolls for damage!
+        .row.no-gutters.attack
+            .col-1
+            .col.damage
+                .text #{form} <span class='result #{c} #{f} #{n}'>#{result} </span> #{sublabel}

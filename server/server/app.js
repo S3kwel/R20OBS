@@ -46,25 +46,15 @@ io.on('connection', function (socket) {
 
     socket.on('parse', function (data) {
         console.log("PARSE REQUEST");
-        console.log(typeof data); 
+        console.log(typeof data);
 
-        if (data.content != null) {
+        if (data.type != null) {
             data.content = unescape(data.content);
-            app.render('chat', data, function (err, data) {
+            app.render(data.type, data, function (err, data) {
                 socket.emit("parsed", data);
             })
         }
-        else {
-            //data.content = unescape(data.content);
-            console.log("PARSING AS ROLL");
-            app.render('roll', data, function (err, data) {
-                socket.emit("parsed", data);
-            })
-        }
-       
-
-        
-    })
+    }); 
 });
 
 

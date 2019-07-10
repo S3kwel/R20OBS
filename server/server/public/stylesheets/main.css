@@ -164,7 +164,31 @@ img.avatar {
   margin-bottom: 15px;
 }
 
-.col.spell, .col.spelldescription {
+.col.damage {
+  background-image: linear-gradient(#e89292, #c12626);
+  border: 1px solid black;
+  border-top: none;
+  margin-bottom: 15px;
+}
+
+.col.check {
+  background-image: linear-gradient(#00B7FF, #05719b);
+  border: 1px solid black;
+  border-top: none;
+  margin-bottom: 15px;
+}
+
+.emote {
+  color: black;
+  font-style: italic;
+  font-family: Vecna;
+}
+
+.col.emote, .spacer.emote {
+  background-color: rgba(142, 142, 142, 0.7);
+}
+
+.col.spell, .col.spelldescription, .col.traitdescription {
   background-image: linear-gradient(#c8c8c8, #969696);
   border: 1px solid black;
   border-top: none;
@@ -173,14 +197,18 @@ img.avatar {
   font-family: Verdana;
 }
 @media (min-width: 400px) {
-  .col.spell, .col.spelldescription {
+  .col.spell, .col.spelldescription, .col.traitdescription {
     font-size: calc(12px + 12 * (100vw - 400px) / 1520);
   }
 }
 @media (min-width: 1920px) {
-  .col.spell, .col.spelldescription {
+  .col.spell, .col.spelldescription, .col.traitdescription {
     font-size: 24px;
   }
+}
+
+.col.traitdescription {
+  background-image: linear-gradient(#ffffff, #e1e1e1);
 }
 
 .col.spelldetails {
@@ -274,114 +302,60 @@ img.avatar {
   background-image: url(/images/verbal.png);
 }
 
-.attack {
-  background-image: url(/images/attack.png);
-}
-
-.spacer.icon img {
-  position: relative;
-  width: 100%;
-  width: 140%;
-  height: 50px;
-  border: 1px solid black;
-  left: -1px;
-  top: -1px;
-  z-index: 10;
-}
-@media (min-width: 400px) {
-  .spacer.icon img {
-    width: calc(140% + -40 * (100vw - 400px) / 800);
-  }
-}
-@media (min-width: 1200px) {
-  .spacer.icon img {
-    width: 100%;
-  }
-}
-@media (min-width: 400px) {
-  .spacer.icon img {
-    height: calc(50px + 100 * (100vw - 400px) / 1520);
-  }
-}
-@media (min-width: 1920px) {
-  .spacer.icon img {
-    height: 150px;
-  }
-}
-
-.spacer.icon.attack img {
-  background-image: linear-gradient(#e8c992, #e8ad43);
-}
-
-.spacer.icon.spell img {
-  background-image: linear-gradient(#c8c8c8, #969696);
-}
-
-.spacer.icon.roll img {
-  background-image: linear-gradient(#0aff08, #289f0c);
-  width: 90%;
-  height: 50px;
-}
-@media (min-width: 400px) {
-  .spacer.icon.roll img {
-    width: calc(90% + -10 * (100vw - 400px) / 800);
-  }
-}
-@media (min-width: 1200px) {
-  .spacer.icon.roll img {
-    width: 80%;
-  }
-}
-@media (min-width: 400px) {
-  .spacer.icon.roll img {
-    height: calc(50px + 20 * (100vw - 400px) / 1520);
-  }
-}
-@media (min-width: 1920px) {
-  .spacer.icon.roll img {
-    height: 70px;
-  }
-}
-
 .icon {
-  width: 25px;
-  height: 25px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+  width: 50px;
+  height: 50px;
   border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-bottom: 0 !important;
+  margin-right: auto;
 }
 @media (min-width: 400px) {
   .icon {
-    width: calc(25px + 25 * (100vw - 400px) / 1520);
+    width: calc(50px + 30 * (100vw - 400px) / 800);
   }
 }
-@media (min-width: 1920px) {
+@media (min-width: 1200px) {
   .icon {
-    width: 50px;
+    width: 80px;
   }
 }
 @media (min-width: 400px) {
   .icon {
-    height: calc(25px + 25 * (100vw - 400px) / 1520);
+    height: calc(50px + 30 * (100vw - 400px) / 800);
   }
 }
-@media (min-width: 1920px) {
+@media (min-width: 1200px) {
   .icon {
-    height: 50px;
+    height: 80px;
   }
+}
+
+.icon.roll {
+  background-image: url("/images/roll.png"), linear-gradient(#70e91d, #19b117);
+}
+
+.icon.attack {
+  background-image: url("/images/attack.png"), linear-gradient(#e8c992, #e8ad43);
+}
+
+.icon.spell {
+  background-image: url("/images/spell.png"), linear-gradient(#c8c8c8, #969696);
+}
+
+.icon.trait {
+  background-image: url("/images/trait.png"), linear-gradient(#ffffff, #e1e1e1);
+}
+
+.icon.check {
+  background-image: url("/images/check.png"), linear-gradient(#00B7FF, #05719b);
 }
 
 .col.spelldetails:last-child {
   border-right: none;
-}
-
-.blue {
-  border: 1px solid blue;
-}
-
-.spellmetrics {
-  border: 1px solid red;
 }
 
 .col.spelldet {

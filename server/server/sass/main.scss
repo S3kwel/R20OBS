@@ -124,14 +124,38 @@ img.avatar {
     margin-bottom: 15px;
 }
 
+.col.damage {
+    background-image: linear-gradient(#e89292,#c12626);
+    border: 1px solid black;
+    border-top: none;
+    margin-bottom: 15px;
+}
 
-.col.spell, .col.spelldescription {
+.col.check {
+    background-image: linear-gradient(#00B7FF,#05719b);
+    border: 1px solid black;
+    border-top: none;
+    margin-bottom: 15px;
+}
+.emote{
+    color: black;
+    font-style: italic; 
+    font-family: Vecna; 
+
+}
+.col.emote, .spacer.emote {
+    background-color: rgba(142, 142, 142, 0.70);
+}
+.col.spell, .col.spelldescription, .col.traitdescription {
     background-image: linear-gradient(#c8c8c8,#969696);
     border: 1px solid black;
     border-top: none;
     margin-bottom: 15px;
     @include fluid-type(font-size,400px,1920px,12px,24px);
-    font-family: Verdana; 
+    font-family: Verdana;
+}
+.col.traitdescription {
+    background-image: linear-gradient(#ffffff,#e1e1e1);
 }
 .col.spelldetails {
     @include fluid-type(font-size,400px,1920px,12px,24px);
@@ -206,51 +230,41 @@ img.avatar {
     background-image: url(/images/verbal.png);
 }
 
-.attack {
-    background-image: url(/images/attack.png);
-}
-.spacer.icon img{
-    position: relative;
-    width: 100%;
-    @include fluid-type(width,400px,1200px,140%,100%);
-    @include fluid-type(height,400px,1920px,50px,150px);
-    border: 1px solid black;
-    left: -1px;
-    top: -1px;
-    z-index: 10; 
-}
-.spacer.icon.attack img {
-    background-image: linear-gradient(#e8c992,#e8ad43);
-}
-.spacer.icon.spell img {
-    background-image: linear-gradient(#c8c8c8,#969696);
-}
-
-.spacer.icon.roll img {
-    background-image: linear-gradient(#0aff08,#289f0c);
-    @include fluid-type(width,400px,1200px,90%,80%);
-    @include fluid-type(height,400px,1920px,50px,70px);
-}
-
 .icon {
-    @include fluid-type(width,400px,1920px,25px,50px);
-    @include fluid-type(height,400px,1920px,25px,50px);
     background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-    border-right: 1px solid black; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+    @include fluid-type(width,400px,1200px,50px,80px);
+    @include fluid-type(height,400px,1200px,50px,80px);
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-bottom: 0 !important;
+    margin-right: auto;
 }
+.icon.roll {
+    background-image: url('/images/roll.png'), linear-gradient(#70e91d,#19b117);
+}
+
+.icon.attack {
+    background-image: url('/images/attack.png'), linear-gradient(#e8c992,#e8ad43);
+}
+
+.icon.spell {
+    background-image: url('/images/spell.png'), linear-gradient(#c8c8c8,#969696);
+}
+
+.icon.trait {
+    background-image: url('/images/trait.png'), linear-gradient(#ffffff,#e1e1e1);
+}
+.icon.check {
+    background-image: url('/images/check.png'), linear-gradient(#00B7FF,#05719b);
+}
+
+
 .col.spelldetails:last-child{
     border-right: none; 
 }
 
-.blue {
-    border: 1px solid blue;
-}
-
-.spellmetrics{
-    border: 1px solid red; 
-}
 .col.spelldet {
     text-align: center;
     word-wrap: break-word;

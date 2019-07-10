@@ -55,17 +55,24 @@ function addMessage(data,res,app){
             cols.push('type','formula', 'result', 'crit', 'fail'); 
             break;
         case "text":
+        case "emote": 
             cols.push('type','content');
             break;
         case "attack":
             cols.push('type','result', 'formula', 'sublabel', 'label', 'advantage', 'description');
             break;
         case "damage":
-            cols.push('type','result', 'formula', 'sublabel');
+            cols.push('type','result', 'formula', 'sublabel','label');
             break;
         case "spell":
             cols.push('name', 'type','castingtime', 'range', 'target', 'components', 'duration', 'description'); 
             break; 
+        case "trait":
+            cols.push('type', 'name', 'components', 'description')
+            break;
+        case "skill":
+            cols.push("type", "result", "formula", "name");
+            break;
     }
 
     //BUILD THE QUERY
@@ -134,17 +141,23 @@ function getData(res) {
     return new Promise((resolve, reject) => {
         db.all("SELECT * FROM chat ORDER BY rowid DESC", [], (err, rows) => {
             rows.forEach((row) => {
-                res.render(row.type, row, function (err, html) { 
-                    if (typeof html != 'undefined') {
-                        console.log(row); 
-                        console.log("ADDED ", html); 
+                if (row.type != null) {
+                    res.render(row.type, row, function (err, html) {
+                        if (typeof html != 'undefined') {
+                            //console.log(row);
+                            //console.log("ADDED ", html);
                             htmlData += html;
                         }
                         else {
-                            console.log(`Skipping ${row.type} due to a lack of a template!`); 
+                            console.log(`Skipping ${row.type} due to a lack of a template!`);
                         }
-                        
+
                     });
+                }
+                else {
+                    console.log(`Skipping a null row!`);
+                    console.log(row); 
+                }
                 
             });
             resolve(htmlData); 

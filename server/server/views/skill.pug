@@ -1,0 +1,20 @@
+﻿block content
+    - var d = unescape(description) != 'null' ? unescape(description) : ''
+    - var c = (crit == true) ? 'crit':'';
+    - var f = (fail ==  true) ? 'fail':''; 
+    - var n = (fail != true && crit != true) ? 'nor':'';
+    - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
+    - var form = formula.replace(/\d+$/, "")
+    - var r = (result.length <= 2) ? result : result.substring(0,2) + ' | ' + result.substring(2); 
+    .container-fluid.attackspace
+        .row.no-gutters.block
+            .col-2.col-sm-1.col-lg-1.spacer
+                .icon.check
+                .row
+                    .col-12
+            .col
+                .text <span class='roller #{g}'>#{by}</span> makes a check: <span class = 'attackname'>#{name}</span>
+        .row.no-gutters.attack
+            .col-1
+            .col.check
+                .text #{form} <span class='result #{c} #{f} #{n}'>#{r}</span>

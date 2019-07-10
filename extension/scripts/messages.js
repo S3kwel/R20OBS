@@ -63,9 +63,14 @@ $(async function () {
                 //TEXT
                 //Plain text has either 0 or 4 children.  
                 if (children.length == 0 || children.length == 4) {
-                    log("TEXT"); 
+                    log("TEXT");
                     r['type'] = "text";
-                    r['content'] = msg.clone().children().remove().end().text();  
+                    r['content'] = msg.clone().children().remove().end().text();
+                }
+                else if (children.length == 2) {
+                    log("EMOTE");
+                    r['type'] = 'emote';
+                    r['content'] = msg.clone().children().remove().end().text();
                 }
 
                 //OTHERS
@@ -151,7 +156,7 @@ $(async function () {
                         r['result'] = rollResult;
                         r['formula'] = rollFormula; 
                         r['sublabel'] = $(element).find('.sheet-sublabel').text().trim();
-
+                        r['label'] = $(element).find('.sheet-label').text().trim();
                     }
 
                     //SPELL
@@ -167,7 +172,35 @@ $(async function () {
                         r['duration'] = element.find('span[data-i18n="duration:"]').next().text().trim(); 
                         r['description'] = element.find('.sheet-description').text().trim(); 
                     }
-                   
+
+                    //TRAITS
+                    if (msg.find('.sheet-rolltemplate-traits').length != 0) {
+                        let element = msg.find('.sheet-rolltemplate-traits');
+                        log("TRAIT");
+                        r['type'] = 'trait';
+                        r['name'] = element.find('.sheet-header').text().trim();
+                        r['components'] = element.find('.sheet-subheader').text().trim();
+                        r['description'] = element.find('.sheet-desc').text().trim();
+                    }
+
+                    //SKILL
+                    if (msg.find('.sheet-rolltemplate-simple').length != 0) {
+                        let element = msg.find('.sheet-rolltemplate-simple');
+                        log("SKILL");
+
+                        let rollResult = element.find('.inlinerollresult').text();
+                        let rollFormula = $(element.find('.inlinerollresult').attr('title')).text();
+                        rollFormula = rollFormula.replace(/\w*cs>\w*/g, rollFormula.match(/\((\d*)/gm)[0]);
+                        rollFormula = rollFormula.replace(/\(/g, "");
+                        rollFormula = rollFormula.replace(/\d*$/g, "");
+                        rollFormula += rollResult;
+                        rollFormula = rollFormula.replace("Rolling ", "");
+
+                        r['type'] = 'skill';
+                        r['result'] = rollResult;
+                        r['formula'] = rollFormula; 
+                        r['name'] = element.find('.sheet-label').text().trim();
+                    }
                     
                     
 
@@ -176,7 +209,10 @@ $(async function () {
                 //APPEND ORIGIN, SEND THE MESSAGE
                 r['origin'] = "R20OBS"; 
                 console.log(r);
-                chrome.runtime.sendMessage(r);
+                if (typeof r.type != 'undefined') {
+                    chrome.runtime.sendMessage(r);
+                }
+                
                 r = {};
                 
             }

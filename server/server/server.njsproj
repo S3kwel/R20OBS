@@ -52,6 +52,9 @@
     <Content Include="sass\main.scss">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="views\skill.pug" />
+    <Content Include="views\emote.pug" />
+    <Content Include="views\trait.pug" />
     <Content Include="views\spell.pug" />
     <Content Include="views\damage.pug" />
     <Content Include="views\roll.pug" />
