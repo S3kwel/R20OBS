@@ -73,6 +73,9 @@ function addMessage(data,res,app){
         case "skill":
             cols.push("type", "result", "formula", "name");
             break;
+        case "spellattack":
+            cols.push("type","advantage","castingtime","description","duration","formula","label","range","result","sublabel","target","components");
+            break; 
     }
 
     //BUILD THE QUERY

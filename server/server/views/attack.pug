@@ -4,7 +4,9 @@
     - var f = (fail ==  true) ? 'fail':''; 
     - var n = (fail != true && crit != true) ? 'nor':'';
     - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
-    - var form = formula.replace(/\d+$/, "")
+    - var form = formula.replace(/\d+$/, "");
+    - var sl = sublabel != 'undefined' ? sublabel :''
+    - var r = (result.length <= 2) ? result : result.substring(0,2) + ' | ' + result.substring(2); 
     .container-fluid.attackspace
         .row.no-gutters.block
             .col-2.col-sm-1.col-lg-1.spacer
@@ -12,9 +14,12 @@
                 .row
                     .col-12
             .col
-                .text <span class='roller #{g}'>#{by}</span> attacks with <span class = 'attackname'>#{label} | #{sublabel}</span>
+                if sl == ''
+                    .text <span class='roller #{g}'>#{by}</span> attacks with <span class = 'attackname'>#{label}</span>
+                else
+                    .text <span class='roller #{g}'>#{by}</span> attacks with <span class = 'attackname'>#{label} | #{sl}</span>
         .row.no-gutters.attack
             .col-1
             .col.attack
-                .text #{form} <span class='result #{c} #{f} #{n}'>#{result}</span>
+                .text #{form} <span class='result #{c} #{f} #{n}'>#{r}</span>
                 .text <span class='description'>#{d}</span> 

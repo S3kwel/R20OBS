@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\scripts"
+    "\\scripts",
+    "\\styles"
   ],
-  "SelectedNode": "\\scripts\\messages.js",
+  "SelectedNode": "\\styles\\main.css",
   "PreviewInSolutionExplorer": false
 }

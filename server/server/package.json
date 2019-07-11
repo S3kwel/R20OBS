@@ -21,7 +21,6 @@
     "request": "^2.88.0",
     "serve-favicon": "^2.3.0",
     "socket.io": "^2.2.0",
-    "sqlite3": "^4.0.9",
     "unescape": "^1.0.1"
   },
   "engines": {
@@ -29,6 +28,7 @@
   },
   "devDependencies": {
     "grunt": "^1.0.4",
-    "grunt-contrib-sass": "^1.0.0"
+    "grunt-contrib-sass": "^1.0.0",
+    "sqlite3": "^4.0.9"
   }
 }

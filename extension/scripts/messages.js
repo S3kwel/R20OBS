@@ -12,7 +12,7 @@ $(async function () {
     let config = { attributes: false, childList: true, subtree: false };
 
    
-    var process = function (mutationList, observer) {
+    var process = async function (mutationList, observer) {
 
 
         for (m of mutationList) {
@@ -97,6 +97,9 @@ $(async function () {
                     //ATTACK COMMANDS
                     //At the moment, the advantage property only determines whether dis/advantage was considered.
                     //Theoretically we could check which of the sheet-adv is greyed out and see if it's the lower or higher.
+                    //The only way to tell between attacks and spell attacks would be to cross-reference sheet-label with spell names.
+                    //Maybe hit the compendium via AJAX to determine?  
+                    //
                     if (msg.find('.sheet-rolltemplate-atk').length != 0) {
                         let element = msg.find('.sheet-rolltemplate-atk');
                         let rollResult = element.find('.inlinerollresult').text(); 
@@ -114,7 +117,33 @@ $(async function () {
 
                         r['sublabel'] = $(element).find('.sheet-sublabel').text().trim();
                         r['label'] = $(element).find('.sheet-label').text().trim();
-                       
+
+                        //Hit the Compendium API to see if a spell result comes up. 
+                        var testType = r['label'].replace(/\((.*?)\)/, '');
+
+                        let spellCheck = await $.ajax({
+                            type: "GET",
+                            url: `https://app.roll20.net/compendium/compendium/globalsearch/dnd5e/?sharedCompendium=4538472&template=true&terms=${testType}`
+                        });
+                        
+                        let spellData = JSON.parse(spellCheck);
+
+                        //Currently limited to the first result returned.  
+                        if (Object.keys(spellData).length != 0) {
+                            let v = Object.values(spellData)[0][0];
+                            if (v.a.indexOf('Spells') != -1) {
+                                log("SPELL ATTACK");
+                                console.log(v);
+
+                                r['type'] = "spellattack"; 
+                                r['castingtime'] = v.c[3];
+                                r['duration'] = v.c[7];
+                                r['range'] = v.c[4];
+                                r['target'] = element.find('span[data-i18n="target:"]').next().text().trim();
+                                r['components'] = v.c[5]; 
+                            }
+                        }
+                
 
                         if (element.find('.sheet-solo').length != 0) {
                             log("NO ADVANTAGE"); 
@@ -157,6 +186,12 @@ $(async function () {
                         r['formula'] = rollFormula; 
                         r['sublabel'] = $(element).find('.sheet-sublabel').text().trim();
                         r['label'] = $(element).find('.sheet-label').text().trim();
+
+                        //Check for a save in the damage. 
+                        if (element.parent().find('.sheet-atk.sheet-save').length != 0) {
+                            log("SAVE REQUIRED");
+                            r['save'] = element.parent().find('.sheet-atk.sheet-save').text().trim();
+                        }
                     }
 
                     //SPELL
@@ -200,6 +235,57 @@ $(async function () {
                         r['result'] = rollResult;
                         r['formula'] = rollFormula; 
                         r['name'] = element.find('.sheet-label').text().trim();
+                    }
+
+                   
+                    if (msg.find('.sheet-rolltemplate-npc').length != 0) {
+                        let element = msg.find('.sheet-rolltemplate-npc');
+                        log("NPC ROLL");
+
+                        let rollResult = element.find('.inlinerollresult').text();
+                        let rollFormula = $(element.find('.inlinerollresult').attr('title')).text();
+                        rollFormula = rollFormula.replace(/\w*cs>\w*/g, rollFormula.match(/\((\d*)/gm)[0]);
+                        rollFormula = rollFormula.replace(/\(/g, "");
+                        rollFormula = rollFormula.replace(/\d*$/g, "");
+                        rollFormula += rollResult;
+                        rollFormula = rollFormula.replace("Rolling ", "");
+
+                        //r['type'] = 'skill';
+                        r['result'] = rollResult;
+                        r['formula'] = rollFormula;
+                        r['name'] = element.find('.sheet-label').text().trim();
+
+                        let rollType = element.parent().find(`.sheet-italics`).text().trim();
+                        if (rollType.toLowerCase().indexOf('ability') != -1) {
+                            log("NPC ABILITY CHECK"); 
+                            r['type'] = 'skill';
+                            r['name'] = element.parent().find(`.sheet-header`).text().trim();
+                        }
+                        //let rollType = element.parent().find(`.sheet-italics`).text().trim();
+                    }
+                    
+                    if (msg.find('.sheet-rolltemplate-npcatk').length != 0) {
+                        let element = msg.find('.sheet-rolltemplate-npcatk');
+                        log("NPC ATTACK");
+
+                        let rollResult = element.find('.inlinerollresult').text();
+                        let rollFormula = $(element.find('.inlinerollresult').attr('title')).text();
+                        rollFormula = rollFormula.replace(/\w*cs>\w*/g, rollFormula.match(/\((\d*)/gm)[0]);
+                        rollFormula = rollFormula.replace(/\(/g, "");
+                        rollFormula = rollFormula.replace(/\d*$/g, "");
+                        rollFormula += rollResult;
+                        rollFormula = rollFormula.replace("Rolling ", "");
+
+                        r['result'] = rollResult;
+                        r['formula'] = rollFormula;
+                        r['label'] = element.find('.sheet-row.sheet-header').find('a').text().trim();
+                        r['type'] = 'attack';
+                        r['description'] = element.find('.sheet-desc').text().trim(); 
+                        r['by'] = element.find('.sheet-italics').text().trim().replace("Attack:",""); 
+
+                        //let rollType = element.parent().find(`.sheet-italics`).text().trim();
+
+                        console.log(r);
                     }
                     
                     
