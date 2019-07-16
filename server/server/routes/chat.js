@@ -91,7 +91,7 @@ function addMessage(data,res,app){
 
     for (let c of cols) {
         if (c == "date") {
-            v = 'CURRENT_TIMESTAMP';
+            v = new Date();
         }
         else if (c == 'description' || c == 'content') {
             v = escape(data[c]); 
@@ -142,7 +142,7 @@ function getData(res) {
     var htmlData = ''; 
     console.log("Pulling the last 100 messages from chat!"); 
     return new Promise((resolve, reject) => {
-        db.all("SELECT * FROM chat ORDER BY rowid DESC", [], (err, rows) => {
+        db.all("SELECT * FROM chat  ORDER BY rowid DESC LIMIT 5", [], (err, rows) => {
             rows.forEach((row) => {
                 if (row.type != null) {
                     res.render(row.type, row, function (err, html) {

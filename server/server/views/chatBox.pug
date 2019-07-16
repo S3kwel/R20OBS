@@ -9,13 +9,20 @@ block content
         socket.emit("parse",data);
     });
 
+    $(function(){
+        $('.container-fluid').delay(10000).fadeOut(200); 
+        });
+
     socket.on("parsed",function(data){
         console.log("DATA REC");
         console.log(data);
         data = $(data).css('display','none');
         $('body').prepend(data);
-        $('.container-fluid').first().fadeIn(200); 
+        $('.container-fluid').first().fadeIn(200).delay(15000).fadeOut(200); 
+      
     });
+
+
         
     
   | !{data}
