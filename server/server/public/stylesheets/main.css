@@ -14,33 +14,49 @@ a {
     color: #00B7FF;
 }
 .chat {
-    display: flex;
-    position: relative;
-    flex-direction: row;
     background: linear-gradient( rgba(255,240,209,0.37), rgba(255,240,209,0.37) ), url(/images/message-bg2.jpg);
     background-position-y: center;
     background-repeat: no-repeat;
     background-size: 100%;
-    box-shadow: 10px 10px 5px 0px rgba(148,148,148,0.37);
+    //box-shadow: 10px 10px 5px 0px rgba(148,148,148,0.37);
     margin-bottom: 20px; 
 }
-.infoBox{
-    display: flex; 
-    flex-direction: column;
-    border-right: 2px solid black; 
+.container.chat {
+    border: 1px solid black; 
+    width: 300px;
+    margin-bottom: 40px; 
 }
 .name {
-    font-weight: bold;
     text-align: center;
     background-color: #0C1713;
     color: white;
     font-family: 'Vecna';
+    font-size: 100%; 
 }
-.avatar{
-    background-size: contain; 
-    width: 100px;
-    height: 100px; 
-    
+.r {
+    border: 1px solid red; 
+}
+.b{
+    border: 1px solid blue; 
+}
+.avatar {
+    position: absolute;
+  
+    background-size: contain;
+    width: 50px;
+    height: 50px;
+    padding: 0 !important;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: #FFFFFF;
+    border: 1px solid black;
+}
+.chat .col-2 {
+    display: flex;
+    align-items: flex-end;
+    top: 30px;
+    left: 30px; 
+    justify-content: center;
 }
 
 .contentBox{
@@ -52,7 +68,7 @@ a {
 }
 .content{
     padding: 10px;
-    font-size: 16pt; 
+    font-size: 12pt; 
     font-weight: bold; 
 }
 
@@ -65,12 +81,17 @@ a {
 }
 
 .rollResult {
-    color: red;
+    color: black;
     font-family: 'Vecna';
+    border: 1px solid black; 
+    padding: 5px; 
+    font-weight: bold; 
+    color: white;
+    background-color: black; 
 }
 .chatName {
-    font-size: 22pt; 
-    color: green;
+    font-size: 12pt; 
+    color: blue;
     font-family: 'Vecna';
     margin-right: 5px; 
 }

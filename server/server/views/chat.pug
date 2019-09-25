@@ -1,7 +1,9 @@
 ﻿block content
-    .chat(data-messageid = `${id}`)
-        .infoBox
-            .name #{by}
-            .avatar(style=`background-image: url(${avatar})`)
-        .contentBox
-            .content !{content}
+    .container.chat(data-messageid = `${id}`)
+        .row
+            .col-12.name #{by}
+        .row
+            .col-10
+                .content !{content}
+            .col-2.p-0
+                .avatar(style=`background-image: url(${avatar})`)
