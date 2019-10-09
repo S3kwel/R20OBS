@@ -4,12 +4,12 @@
     - var f = (fail != 'undefined') ? 'fail':''; 
     - var n = (fail == 'undefined' && crit == 'undefined') ? 'normal':'';
     - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
-    .container-fluid.space
-        .row.no-gutters.block
-            .col-2.col-sm-1.col-lg-1.spacer
-                .icon.roll
-                .row
-                    .col-12
-            .col
-                .text <span class='roller #{g}'>#{by}</span> rolls <span class='formula'>#{formula}</span>...and gets a <span class='result #{c} #{f} #{n}'>#{result}</span>!
-               
+    block content
+        .container.chat
+            .row
+                .col-12.name.roll #{by}
+            .row
+                .col-12
+                    .content.normalroll #{formula} = #{result}
+                    .avatar.flex.rollresult #{result}
+                    

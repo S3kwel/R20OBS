@@ -1,43 +1,175 @@
 $(async function () { 
 
+	function uuid() {
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+			return v.toString(16);
+		});
+	}
 
-    function log(message) {
-        console.log(`%c ${message}`, `background: #222; color: #bada55`);
+
+    /**
+     * Distinctive logging to pick out extension messages from the console.  
+     * @param {any} message The message to log.  
+     */
+    function log(message) {console.log(`%c ${message}`, `background: #222; color: #bada55`);}
+
+	
+	function cleanRolls(string, advantage){
+			if(string.indexOf('.') != -1){
+				
+			}
+	}
+
+    /**
+     * Takes the input string and returns its shorthand form for components (V,S,M)
+     * Returns the original string if none were found.  
+     * @param {any} string The input string.  
+     */
+	function cleanComps(string){
+        let r = string.match(/[V]|[S]|[M]/gm); 
+		//console.log("MATCH");
+		//console.log(r); 
+        let rS;  
+		if(r.length != 0){
+			rS = '';
+			//console.log(r); 
+			for(let i of r){
+				rS += i + ','; 
+				//console.log(i); 
+			}
+			//Strip the last comma.  
+            rS = rS.substring(0, rS.length - 1);		
+        }
+
+        //...Check for components with a currency requirement.  
+        let currencies = ['CP', 'SP', 'GP', 'PP', 'EP','cp','sp','pp','ep','gp']; 
+        for (let currency of currencies) {
+            if (string.indexOf(currency) != -1) {
+                if (rS != '') {
+                    rS += '*';
+                    return rS;
+                }
+                else { return rS; }
+            }
+        }
+		if(rS != ''){
+			return rS; 
+		} 
+		return string; 
+	}
+    /**
+     * Takes the message in progress and add crit/fail designations if needed.  
+     * @param {any} crit the CSS tag used to denote a crit.
+     * @param {any} fail the CSS tag used to denote a fail.
+     * @param {any} msg the message element to be considered. 
+     * @param {any} r the message in progress.  
+     */
+    function critHandle(crit,fail,msg,r) {
+        if ($(msg).children().find(crit).length != 0) { r['crit'] = true; }
+        if ($(msg).children().find(fail).length != 0) { r['fail'] = true; }
+        return r; 
     }
+
+    function actionHandle(string) {
+        let ret; 
+        switch (string) {
+            case "1 action":
+                ret = "1A";
+                break;
+            default:
+                ret = string;
+                break;
+        }
+
+        return ret; 
+    }
+
+    function durationParse(string) {
+        let ret;
+        string = string.toLowerCase(); 
+
+        let digits = string.match(/\d{2}|\d{1}/gmi);
+        if (digits != null) {
+            digits = digits[0]; 
+        }
+
+        let hMatches = string.match(/[0-9]{2} hour |[0-9]{1} hour/gmi); 
+        let mMatches = string.match(/[0-9]{2} minute |[0-9]{1} minute/gmi); 
+        let rMatches = string.match(/[0-9]{2} round |[0-9]{1} round/gmi); 
+
+        //For a specified number of hours...
+        if (hMatches != null) {
+            if (hMatches.length != 0) { ret = `${digits}H`; }
+        }
+
+        //...minutes...
+        if (mMatches != null) {
+            if (mMatches.length != 0) { ret = `${digits}M`; }
+        }
+
+        //...rounds...
+        if (rMatches != null) {
+            if (rMatches.length != 0) { ret = `${digits}R`; }
+        }
+        //Instantaneous... 
+        if (string == 'instantaneous') { ret = "I"; }
+
+        //Until dispelled...
+        if (string.indexOf('until dispelled') != -1) { ret = 'UD'; }
+
+        //Default...
+        
+
+        //Conentration requirement.... 
+        if (string.indexOf('concentration') != -1) {
+            ret += '*';
+        }
+
+        return ret; 
+    }
+
+	//mutationObserver settings.  
     let firstMutation = true;
-
-
-
     let chatBox = $(`.content`);
     let config = { attributes: false, childList: true, subtree: false };
 
-   
+   /**
+    * Scrubs the mutations of chatBox for Roll20-formatted messages.  
+    * @param {any} mutationList
+    * @param {any} observer
+    */
+	var lastSend = ''; 
     var process = async function (mutationList, observer) {
-
-
         for (m of mutationList) {
-            let message = m.addedNodes[0];
+            let message;
+
+            //Allows template reading from the server's test page.  
+			if(window.location.href.indexOf('test') != -1){message = m.addedNodes[1];}
+
+            //Standard reading for production.
+            else { message = m.addedNodes[0]; }
+
             if (m.type == 'childList' && firstMutation == false && typeof message != 'undefined') {
+				//console.log(message); 
                 var classArray = [...message.classList];
 
                 if (classArray.indexOf('system') != -1 || classArray.indexOf('error') != -1) {
-                    console.log('Skipping system message...'); 
+                    //console.log('Skipping system message...'); 
                     break;
                 }
 
                 //Object to send out to the sever. 
                 let r = {}; 
+				r.internalID = uuid();   
 
                 let msg = $(message);
                 let IDINFO_FOUND = false;
                 let IDINFO_MSG = $(message); 
-
                 let children = msg.children();
 
 
-                /**
-                 * For every message, we will need to identify the closest one with identifying information.
-                 * */
+                //For every message, we will need to identify the closest one with identifying information.
                 do {
                     let by = $(IDINFO_MSG).children('.by').html();
                     if (IDINFO_FOUND == false) {
@@ -53,12 +185,12 @@ $(async function () {
                
                 //Populate the return with IDINFO data. 
                 r['avatar'] = `http://app.roll20.net` + $(IDINFO_MSG).find('.avatar').find('img').attr('src'); 
-                r['messageid'] = $(IDINFO_MSG).data('messageid'); 
+                r['messageid'] = $(message).data('messageid'); 
                 r['timestamp'] = $(IDINFO_MSG).children('.tstamp').html(); 
                 r['by'] = $(IDINFO_MSG).children('.by').html();
                 r['by'] = r['by'].substring(0, r['by'].length - 1); 
 
-                //console.log(msg[0]); 
+                //MESSAGE TYPES
 
                 //TEXT
                 //Plain text has either 0 or 4 children.  
@@ -67,15 +199,14 @@ $(async function () {
                     r['type'] = "text";
                     r['content'] = msg.clone().children().remove().end().text();
                 }
+                //EMOTES
                 else if (children.length == 2) {
                     log("EMOTE");
                     r['type'] = 'emote';
                     r['content'] = msg.clone().children().remove().end().text();
                 }
 
-                //OTHERS
-                //log("OTHER"); 
-                if (children.length > 0 && children.length != 4) {
+                if (children.length > 0 && children.length !== 4) {
                     let childClass = [...msg[0].classList]; 
                    
                     //ROLLS
@@ -84,14 +215,8 @@ $(async function () {
                         r['type'] = 'roll'; 
                         r['formula'] = $(msg).children('.formula').html().toLowerCase().replace('rolling', '');
                         r['result'] = $(msg).children('.rolled').html(); 
-
-                        if ($(msg).children().find('.critsuccess').length != 0) {
-                           r['crit'] = true;
-                        }
-                        if ($(msg).children().find('.critfail').length != 0) {
-                            r['fail'] = true; 
-                        }
-                       
+						//alert($(msg).children('.rolled').html()); 
+                        r = critHandle('.critsuccess', '.critfail', msg, r); 
                     }
 
                     //ATTACK COMMANDS
@@ -127,20 +252,18 @@ $(async function () {
                         });
                         
                         let spellData = JSON.parse(spellCheck);
-
+					
                         //Currently limited to the first result returned.  
-                        if (Object.keys(spellData).length != 0) {
+                        if (Object.keys(spellData.results).length != 0) {
                             let v = Object.values(spellData)[0][0];
                             if (v.a.indexOf('Spells') != -1) {
                                 log("SPELL ATTACK");
-                                console.log(v);
-
                                 r['type'] = "spellattack"; 
-                                r['castingtime'] = v.c[3];
-                                r['duration'] = v.c[7];
+                                r['castingtime'] = actionHandle(v.c[3]);
+                                r['duration'] = durationParse(v.c[7]);
                                 r['range'] = v.c[4];
                                 r['target'] = element.find('span[data-i18n="target:"]').next().text().trim();
-                                r['components'] = v.c[5]; 
+                                r['components'] = cleanComps(v.c[5]);								
                             }
                         }
                 
@@ -156,7 +279,7 @@ $(async function () {
                             r['advantage'] = true; 
                             
                         }
-
+						
                         //CHECK FOR DESCRIPTION
                         //.sheet-desc
                         if (msg.find('.sheet-desc').length != 0) {
@@ -164,7 +287,9 @@ $(async function () {
                             r['description'] = element.text().trim(); 
                         }
 
-                        //if(msg.next())
+            
+                        r = critHandle('.fullcrit', '.fullfail', msg, r);
+						r = cleanResults(r); 
                     }
 
                     //DAMAGE
@@ -198,14 +323,25 @@ $(async function () {
                     if (msg.find('.sheet-rolltemplate-spell').length != 0) {
                         let element = msg.find('.sheet-rolltemplate-spell');
                         log("SPELL");
-                        r['type'] = 'spell'; 
+						r['type'] = 'spell'; 
+						
+                        if (element.find('span[data-i18n="casting-time:"]').next().text().trim() == "1 action") {
+                            r['castingtime'] = "1A";
+                        }
+                        else {
+                            r['castingtime'] = element.find('span[data-i18n="casting-time:"]').next().text().trim(); 
+                        }
+						
                         r['name'] = element.find('.sheet-title').text().trim(); 
-                        r['castingtime'] = element.find('span[data-i18n="casting-time:"]').next().text().trim(); 
+                       
                         r['range'] = element.find('span[data-i18n="range:"]').next().text().trim(); 
                         r['target'] = element.find('span[data-i18n="target:"]').next().text().trim(); 
-                        r['components'] = element.find('span[data-i18n="components:"]').next().text().trim();
-                        r['duration'] = element.find('span[data-i18n="duration:"]').next().text().trim(); 
+                        r['components'] = cleanComps(element.find('span[data-i18n="components:"]').next().text().trim());
+                        r['duration'] = durationParse(element.find('span[data-i18n="duration:"]').next().text().trim()); 
                         r['description'] = element.find('.sheet-description').text().trim(); 
+						
+						
+						
                     }
 
                     //TRAITS
@@ -223,7 +359,7 @@ $(async function () {
                         let element = msg.find('.sheet-rolltemplate-simple');
                         log("SKILL");
 
-                        let rollResult = element.find('.inlinerollresult').text();
+                        let rollResult = element.find('.inlinerollresult').html();
                         let rollFormula = $(element.find('.inlinerollresult').attr('title')).text();
                         rollFormula = rollFormula.replace(/\w*cs>\w*/g, rollFormula.match(/\((\d*)/gm)[0]);
                         rollFormula = rollFormula.replace(/\(/g, "");
@@ -285,7 +421,7 @@ $(async function () {
 
                         //let rollType = element.parent().find(`.sheet-italics`).text().trim();
 
-                        console.log(r);
+                        //console.log(r);
                     }
                     
                     
@@ -294,11 +430,22 @@ $(async function () {
 
                 //APPEND ORIGIN, SEND THE MESSAGE
                 r['origin'] = "R20OBS"; 
-                console.log(r);
-                if (typeof r.type != 'undefined') {
-                    chrome.runtime.sendMessage(r);
-                }
-                
+                //console.log(r);
+				if(lastSend != ''){
+					if(lastSend.messageid == r.messageid){
+						log("STOPPING DUPLICATE SEND");
+					}
+					else{
+						if (typeof r.type != 'undefined') {
+							chrome.runtime.sendMessage(r);
+						}
+					}
+				}
+				else{
+					log('first message received! '); 
+				}
+				
+                lastSend = r; 
                 r = {};
                 
             }
@@ -306,10 +453,16 @@ $(async function () {
 
 
         if (firstMutation == true) {
-            console.log("SETTING MUTATIONS TO FALSE");
+            //console.log("SETTING MUTATIONS TO FALSE");
             firstMutation = false;
         }
     }
+
     var messages = new MutationObserver(process);
     messages.observe(chatBox[0], config);
+	
+	
+	
+	
+	
 });

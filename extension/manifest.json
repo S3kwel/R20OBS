@@ -17,7 +17,7 @@
   },
   "content_scripts": [
     {
-      "matches": [ "*://app.roll20.net/editor/" ],
+      "matches": [ "*://app.roll20.net/editor/", "*://*/test" ],
       "js": [ "scripts/lib/jquery.min.js", "scripts/messages.js", "scripts/aesthetic.js" ],
       "css": [ "styles/jukebox.css", "styles/message.css" ]
     }

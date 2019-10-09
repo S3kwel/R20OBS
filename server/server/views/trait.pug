@@ -1,18 +1,10 @@
 ﻿block content
-    - var d = unescape(description) != 'null' ? unescape(description) : ''
-    - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
-    .container-fluid.attackspace
-        .row.no-gutters.block
-            .col-2.col-sm-1.col-lg-1
-                .icon.trait
-                .row
-                    .col-12
-            .col
-                .col.text <span class='roller #{g}'>#{by}</span> uses a trait:  <span class = 'attackname'>#{name}</span>!
-                //rolls <span class='formula'>#{formula}</span>...and gets a <span class='result #{c} #{f} #{n}'>#{result}</span>!
-
-        .row.no-gutters.attack
-            .col-1
-            .col.traitdescription #{d}
-        
-            
+    - var d = unescape(description) != 'undefined' ? unescape(description) : ''
+    .container.chat
+        .row
+            .col-12.name.trait #{name}
+        .row
+            .col-12
+                .content #{d}
+                .avatar.trait
+                

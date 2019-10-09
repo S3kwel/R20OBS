@@ -1,34 +1,19 @@
 ﻿block content
     - var d = unescape(description) != 'null' ? unescape(description) : ''
-    - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
-    .container-fluid.attackspace
-        .row.no-gutters.block
-            .col-2.col-sm-1.col-lg-1
-                .icon.spell
-                .row
-                    .col-12
-            .col
-                .col.text <span class='roller #{g}'>#{by}</span> casts <span class = 'attackname'>#{name}</span>!
-                //rolls <span class='formula'>#{formula}</span>...and gets a <span class='result #{c} #{f} #{n}'>#{result}</span>!
-
-        .row.no-gutters.attack
-            .col-1
-            .col.spelldescription #{d}
-        .row.no-gutters
-            .col-1
-            .col.spelldetails
-                .row.no-gutters
-                    .col.icon.time
-                    .col.icon.target
-                    .col.icon.duration
-                    .col.icon.components
-        .row.no-gutters
-            .col-1
-            .col.spelldetails
-                .row.no-gutters
-                    .col.spelldet #{castingtime}
-                    .col.spelldet  #{target}
-                    .col.spelldet  #{duration}
-                    .col.spelldet  #{components}
-        
-            
+    - var g = (by.indexOf('(GM)') != -1) ? 'gm':'';
+    - var short = (d.length <= 99) ? 'true' : '';
+        .container.chat
+            .row
+                .col-12.name.spell #{name}
+            .row
+                .col-12.p-0
+                    .content !{d}
+                    .avatar.spell
+            .row
+                .col-4.spelldet.icon.time
+                .col-4.spelldet.icon.duration
+                .col-4.spelldet.icon.components
+            .row
+                .col-4.spelldet.icon #{castingtime}
+                .col-4.spelldet.icon #{duration}
+                .col-4.spelldet.icon #{components}

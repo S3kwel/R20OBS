@@ -37,354 +37,262 @@ h1 {
   font-weight: normal;
   font-style: normal;
 }
-body {
-  font-family: Vecna !important;
-}
-
-a {
-  color: #00B7FF;
-}
-
-.block {
+.container.chat {
   border: 1px solid black;
-  background: linear-gradient(rgba(199, 138, 5, 0.28), rgba(199, 138, 5, 0.28)), url(/images/message-bg2.jpg);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  box-shadow: inset 0px 0px 60px -2px black;
-  box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.46);
-}
-
-.speakingas {
-  background-color: black;
-  color: white;
-  text-align: center;
-}
-
-img.avatar {
-  width: 100%;
-  max-width: initial;
-  max-height: initial;
-  background-size: 100% 100%;
-  background-color: #ebd6a9;
-  border-right: 2px solid black;
-}
-
-.space {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.attackspace {
-  margin-top: 20px;
-  margin-bottom: -15px;
-}
-
-.spacer {
-  background: none;
-  background-color: transparent;
-}
-
-.text {
-  word-wrap: break-word;
-  padding: 10px;
-  font-size: 12pt;
-  font-family: Verdana;
-}
-@media (min-width: 400px) {
-  .text {
-    font-size: calc(12pt + 12 * (100vw - 400px) / 1520);
-  }
-}
-@media (min-width: 1920px) {
-  .text {
-    font-size: 24pt;
-  }
-}
-
-.roller, .formula {
-  font-family: Vecna;
-  font-weight: bold;
-}
-
-.rollcol {
-  background-size: cover;
-  text-align: center;
-}
-
-.result, .attackname {
-  display: inline-block;
-  font-family: Vecna;
-  text-align: center;
-  padding: 0 !important;
-}
-
-.formula {
-  border: 1px solid black;
-  background-color: rgba(147, 147, 147, 0.3);
-  word-wrap: break-word;
-  padding: 0 !important;
-  width: initial !important;
-}
-
-.crit, .fail, .nor {
-  display: inline-block;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  border: 1px solid black;
-  padding: 0 !important;
-}
-
-.crit {
-  background-color: rgba(0, 255, 36, 0.3);
-}
-
-.fail {
-  background-color: rgba(255, 0, 0, 0.3);
-}
-
-.nor {
-  background-color: rgba(255, 255, 255, 0.3);
+  width: 303px;
+  margin-bottom: 10px;
   color: black;
 }
 
-.gm {
-  color: red;
-}
-
-.attackname {
-  font-weight: bold !important;
-}
-
-.col.attack {
-  background-image: linear-gradient(#e8c992, #e8ad43);
+.avatar {
+  position: absolute;
+  background-size: contain;
+  width: 52px;
+  height: 52px;
+  padding: 0 !important;
+  left: 100%;
+  top: -27px;
+  background-color: #FFFFFF;
   border: 1px solid black;
-  border-top: none;
-  margin-bottom: 15px;
 }
 
-.col.damage {
-  background-image: linear-gradient(#e89292, #c12626);
-  border: 1px solid black;
-  border-top: none;
-  margin-bottom: 15px;
+.avatar.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.col.check {
-  background-image: linear-gradient(#00B7FF, #05719b);
-  border: 1px solid black;
-  border-top: none;
-  margin-bottom: 15px;
+.content {
+  word-break: break-word;
+  padding-left: 3px !important;
+  padding-bottom: 3px !important;
 }
 
-.emote {
+.name {
+  text-align: center;
+  background-color: #0C1713;
   color: black;
-  font-style: italic;
-  font-family: Vecna;
-}
-
-.col.emote, .spacer.emote {
-  background-color: rgba(142, 142, 142, 0.7);
-}
-
-.col.spell, .col.spelldescription, .col.traitdescription {
-  background-image: linear-gradient(#c8c8c8, #969696);
-  border: 1px solid black;
-  border-top: none;
-  margin-bottom: 15px;
-  font-size: 12px;
-  font-family: Verdana;
-}
-@media (min-width: 400px) {
-  .col.spell, .col.spelldescription, .col.traitdescription {
-    font-size: calc(12px + 12 * (100vw - 400px) / 1520);
-  }
-}
-@media (min-width: 1920px) {
-  .col.spell, .col.spelldescription, .col.traitdescription {
-    font-size: 24px;
-  }
-}
-
-.col.traitdescription {
-  background-image: linear-gradient(#ffffff, #e1e1e1);
-}
-
-.col.spelldetails {
-  font-size: 12px;
-  border: 1px solid black;
-  border-top: none;
-  background-color: #969696;
-  margin-top: -15px;
-  font-family: Verdana;
-  margin-bottom: 15px;
-}
-@media (min-width: 400px) {
-  .col.spelldetails {
-    font-size: calc(12px + 12 * (100vw - 400px) / 1520);
-  }
-}
-@media (min-width: 1920px) {
-  .col.spelldetails {
-    font-size: 24px;
-  }
-}
-
-.attack .text {
-  font-family: Vecna !important;
-  font-weight: bold !important;
-}
-
-.description {
-  padding: 5px !important;
-  font-family: Verdana;
-  font-size: 12px;
-  font-weight: normal;
-}
-@media (min-width: 400px) {
-  .description {
-    font-size: calc(12px + 12 * (100vw - 400px) / 1520);
-  }
-}
-@media (min-width: 1920px) {
-  .description {
-    font-size: 24px;
-  }
-}
-
-.spellinfo {
-  width: 100%;
+  font-family: "Vecna";
+  font-size: 100%;
   font-weight: bold;
-  font-size: 16px;
-  border-bottom: 1px solid black;
-  padding: 5px !important;
 }
 
-.spellinfo:nth-child(2) {
-  font-family: Verdana;
-  font-size: 10pt;
+.avatar.spell {
+  background-image: url("/images/spell.png"), linear-gradient(#c8c8c8, #c8c8c8);
 }
 
-.spellinfo {
-  border: 1px solid black;
+.name.spell {
+  background-color: #959595;
 }
 
-.time {
-  background-image: url(/images/time.png);
+.name.roll {
+  background-color: rgba(68, 146, 14, 0.4);
 }
 
-.duration {
-  background-image: url(/images/duration.png);
+.name.check {
+  background-color: #006e99;
 }
 
-.target {
-  background-image: url(/images/target.png);
+.name.trait {
+  background-color: #aeaeae;
 }
 
-.components {
-  background-image: url(/images/components.png);
+.name.attack {
+  background-color: #d69f3e;
 }
 
-.spell {
-  background-image: url(/images/spell.png);
+.name.message {
+  background-color: #cccccc;
 }
 
-.somatic {
-  background-image: url(/images/somatic.png);
+.name.dam {
+  background-color: #931d11;
 }
 
-.material {
-  background-image: url(/images/material.png);
+.spelldet {
+  border-top: 1px solid black;
+  text-align: center;
 }
 
-.verbal {
-  background-image: url(/images/verbal.png);
-}
-
-.icon {
+.spelldet.icon {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   margin-bottom: 0 !important;
   margin-right: auto;
 }
-@media (min-width: 400px) {
-  .icon {
-    width: calc(50px + 30 * (100vw - 400px) / 800);
-  }
-}
-@media (min-width: 1200px) {
-  .icon {
-    width: 80px;
-  }
-}
-@media (min-width: 400px) {
-  .icon {
-    height: calc(50px + 30 * (100vw - 400px) / 800);
-  }
-}
-@media (min-width: 1200px) {
-  .icon {
-    height: 80px;
-  }
+
+.spelldet.icon.time {
+  background-image: url(/images/time.png);
 }
 
-.icon.roll {
-  background-image: url("/images/roll.png"), linear-gradient(#70e91d, #19b117);
+.icon.target {
+  background-image: url(/images/target.png);
 }
 
-.icon.attack {
-  background-image: url("/images/attack.png"), linear-gradient(#e8c992, #e8ad43);
+.icon.duration {
+  background-image: url(/images/duration.png);
 }
 
-.icon.spell {
-  background-image: url("/images/spell.png"), linear-gradient(#c8c8c8, #969696);
+.icon.components {
+  background-image: url(/images/components.png);
 }
 
-.icon.trait {
-  background-image: url("/images/trait.png"), linear-gradient(#ffffff, #e1e1e1);
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: Verdana;
 }
 
-.icon.check {
-  background-image: url("/images/check.png"), linear-gradient(#00B7FF, #05719b);
+.action {
+  background-color: green !important;
 }
 
-.col.spelldetails:last-child {
-  border-right: none;
+.emph {
+  display: inline-block;
+  font-style: italic;
+  color: black;
 }
 
-.col.spelldet {
+.desc {
   text-align: center;
-  word-wrap: break-word;
-  border-right: 1px solid black;
-  width: 25px;
-  font-size: 8pt;
+}
+
+.chat {
+  background-image: #FFFFFF;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-bottom: 20px;
+}
+
+.result {
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+}
+
+.content.result {
+  display: inline-block;
+  padding: 0 !important;
+  text-align: center;
+}
+
+.r {
+  border: 1px solid red;
+}
+
+.b {
+  border: 1px solid blue;
+}
+
+.chat .col-2 {
+  display: flex;
+  align-items: flex-end;
+  left: 50px;
+  justify-content: center;
+}
+
+.col-10 {
   padding: 0 !important;
 }
-@media (min-width: 400px) {
-  .col.spelldet {
-    width: calc(25px + 25 * (100vw - 400px) / 1520);
-  }
+
+.contentBox {
+  flex-grow: 1;
+  justify-self: flex-start;
 }
-@media (min-width: 1920px) {
-  .col.spelldet {
-    width: 50px;
-  }
+
+.spacer {
+  width: 100px;
 }
-@media (min-width: 400px) {
-  .col.spelldet {
-    font-size: calc(8pt + 4 * (100vw - 400px) / 800);
-  }
+
+.content {
+  padding: 0px;
+  font-size: 12pt;
 }
-@media (min-width: 1200px) {
-  .col.spelldet {
-    font-size: 12pt;
-  }
+
+.total {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.total.crit {
+  color: green;
+}
+
+.total.fail {
+  color: red;
+}
+
+.chat.emote {
+  background-color: #f5e4d4;
+  border: 2px solid #e8c992;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.content.normalroll {
+  font-size: larger;
+  text-align: center;
+}
+
+/**
+    ICONS
+*/
+.check {
+  background-image: url("/images/check.png"), linear-gradient(#00B7FF, #00B7FF);
+}
+
+.attack {
+  background-image: url("/images/attack.png"), linear-gradient(#e8c992, #e8c992);
+}
+
+.trait {
+  background-image: url("/images/trait.png"), linear-gradient(#e1e1e1, #e1e1e1);
+}
+
+.damage {
+  font-size: larger;
+  font-weight: bold;
+  background-color: #e63624;
+}
+
+.rollresult {
+  background-image: linear-gradient(rgba(112, 233, 29, 0.4), rgba(112, 233, 29, 0.4)), url("/images/roll.png");
+  font-size: larger;
+  font-weight: bold;
+  color: black;
+  -webkit-text-stroke: 1px black;
+}
+
+.spelldet_0 {
+  top: 0px;
+}
+
+.spelldet_1 {
+  top: 55px;
+}
+
+.spelldet_2 {
+  top: 110px;
+}
+
+.spelldet_3 {
+  top: 165px;
+}
+
+.spelldet_4 {
+  top: 220px;
+}
+
+.test.content {
+  border: 1px solid red;
+  width: 500px;
+  height: 800px;
 }
 
 /*# sourceMappingURL=main.css.map */

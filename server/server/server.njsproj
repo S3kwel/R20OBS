@@ -36,6 +36,12 @@
     <Content Include="Gruntfile.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\javascripts\JavaScript.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\javascripts\test.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\stylesheets\roll20.css">
       <SubType>Code</SubType>
     </Content>
@@ -52,6 +58,7 @@
     <Content Include="sass\main.scss">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="views\test.pug" />
     <Content Include="views\spellattack.pug" />
     <Content Include="views\skill.pug" />
     <Content Include="views\emote.pug" />

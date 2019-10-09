@@ -23,6 +23,11 @@ router.get('/', function (req, res) {
     });
 });
 
+router.get('/test', function (req, res) {
+    var r = res;
+    res.render('test');
+});
+
 //router.get('/', function (req, res) {
 //    res.render('index', { title: 'Express', "data": req.body });
 //});

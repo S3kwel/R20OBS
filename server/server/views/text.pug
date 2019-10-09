@@ -1,15 +1,12 @@
 ﻿block content
     - var d = unescape(content) != 'null' ? unescape(content) : ''
     - var a = (avatar.indexOf('undefined') == -1) ? avatar:'/images/verbal.png';
-    .container-fluid.space
-        .row.no-gutters.block
-            .col-3.col-sm-2.col-lg-1.speakingas
-                .row
-                    .col-12 #{by}
-                .row
-                    .col-12
-                        img.avatar(src=`${a}`)
-            .col
-                .row.no-gutters
-                .text #{d}
-               
+    block content
+        .container.chat
+            .row
+                .col-12.name.message #{by}
+            .row
+                .col-12.p-0
+                    .content !{d}
+                    .avatar(style=`background-image: url(${a})`)
+                    

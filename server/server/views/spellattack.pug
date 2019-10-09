@@ -5,33 +5,26 @@
     - var n = (fail != true && crit != true) ? 'nor':'';
     - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
     - var form = formula.replace(/\d+$/, "");
+    - var sl = sublabel != 'undefined' ? sublabel :''
     - var r = (result.length <= 2) ? result : result.substring(0,2) + ' | ' + result.substring(2); 
-    .container-fluid.attackspace
-        .row.no-gutters.block
-            .col-2.col-sm-1.col-lg-1.spacer
-                .icon.spell
-                .row
-                    .col-12
-            .col
-                .text <span class='roller #{g}'>#{by}</span> attacks with <span class = 'attackname'>#{label}!</span>
-        .row.no-gutters.attack
-            .col-1
-            .col.spelldescription 
-                .text #{form} <span class='result #{c} #{f} #{n}'>#{r}</span>
-                .spelldesription #{d}
-        .row.no-gutters
-            .col-1
-            .col.spelldetails
-                .row.no-gutters
-                    .col.icon.time
-                    .col.icon.target
-                    .col.icon.duration
-                    .col.icon.components
-        .row.no-gutters
-            .col-1
-            .col.spelldetails
-                .row.no-gutters
-                    .col.spelldet #{castingtime}
-                    .col.spelldet  #{target}
-                    .col.spelldet  #{duration}
-                    .col.spelldet  #{components}
+    .container.chat
+        .row
+            .col-12.name.spell #{label}
+        .row
+            .col-12.p-0
+                if(d != 'undefined')
+                    .content !{d}
+                .avatar.spell
+        .row
+            .col-12.p-0.text-center
+                .content.result #{form} <span class='total #{c} #{f} #{n}'>#{r}</span>
+        .row
+            .col.p-0.text-center #{sl}
+        .row
+            .col-4.spelldet.icon.time
+            .col-4.spelldet.icon.duration
+            .col-4.spelldet.icon.components
+        .row
+            .col-4.spelldet.icon #{castingtime}
+            .col-4.spelldet.icon #{duration}
+            .col-4.spelldet.icon #{components}

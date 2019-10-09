@@ -1,4 +1,5 @@
 ﻿'use strict';
+var oldQuery = false; 
 var express = require('express');
 var router = express.Router();
 var request = require('request'); 
@@ -29,10 +30,9 @@ function addChat(data){
     request.post({
         headers: { 'content-type': 'application/json' }
         , url: `http://localhost:${process.env.PORT}/render`, body: JSON.stringify(data) }
-               , function(error, response, body){
-                   console.log(body); 
-    });  
+               , function(error, response, body){});  
 }
+
 /**
  * 
  * @param {any} data
@@ -47,8 +47,6 @@ function addMessage(data,res,app){
 
     //All queries should have this information at least.
     let cols = ['date', 'avatar', 'messageid', 'timestamp', 'by'];
-
-    console.log("incoming", data.type, "...."); 
 
     switch (data.type) {
         case "roll":
@@ -81,11 +79,7 @@ function addMessage(data,res,app){
     //BUILD THE QUERY
     let v;
     let query = `INSERT INTO chat(`;
-    for (let c of cols) {
-        //Date is the one column that breaks the genreal rule. 
-        query += `${c},`       
-    }
-
+    for (let c of cols) { query += `${c},`}
     query = query.substring(0, query.length - 1); 
     query += ') VALUES(';
 
@@ -107,19 +101,41 @@ function addMessage(data,res,app){
     query += `)`; 
 
     //Prepare/run the query.  'Update' chat with the new data.  
-    var ins = db.prepare(query);
-    ins.run(function () {
-        db.get(`SELECT * FROM chat WHERE rowid=${this.lastID}`, function (err, row) {
-            app.io.emit("update", row);
+    if (oldQuery == false) {
+        oldQuery = query;
+        console.log("Setting OldQuery for the first time!");
+        console.log(query); 
+
+        var ins = db.prepare(query);
+        ins.run(function () {
+            db.get(`SELECT * FROM chat WHERE rowid=${this.lastID}`, function (err, row) {
+                app.io.emit("update", row);
+            });
         });
-    });
 
-    ins.finalize();
+        ins.finalize();
 
-    db.each('SELECT rowid AS id, * FROM chat ORDER BY id DESC LIMIT 1;', function (err, row) {
-        console.log(`Added ${row.type}, from ${row.by}`)
-    });
+        db.each('SELECT rowid AS id, * FROM chat ORDER BY id DESC LIMIT 1;', function (err, row) {
+            console.log(`Added ${row.type}, from ${row.by}`)
+        });
+    }
+    else if (oldQuery == query) {
+        console.log("Duplicate detected! Stopping.");
+    }
+    else {
+        var ins = db.prepare(query);
+        ins.run(function () {
+            db.get(`SELECT * FROM chat WHERE rowid=${this.lastID}`, function (err, row) {
+                app.io.emit("update", row);
+            });
+        });
 
+        ins.finalize();
+
+        db.each('SELECT rowid AS id, * FROM chat ORDER BY id DESC LIMIT 1;', function (err, row) {
+            console.log(`Added ${row.type}, from ${row.by}`)
+        });
+    }
     //RESET COLS
     cols = ['date', 'avatar', 'messageid', 'timestamp', 'by'];
 }

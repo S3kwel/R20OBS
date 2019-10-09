@@ -1,20 +1,19 @@
 ﻿block content
-    - var d = unescape(description) != 'null' ? unescape(description) : ''
+    - var d = unescape(description) != 'undefined' ? unescape(description) : ''
     - var c = (crit == true) ? 'crit':'';
     - var f = (fail ==  true) ? 'fail':''; 
     - var n = (fail != true && crit != true) ? 'nor':'';
-    - var g = (by.indexOf('(GM)') != -1) ? 'gm':''; 
-    - var form = formula.replace(/\d+$/, "")
-    - var l = (label != 'null') ? label : 'false'
-    .container-fluid.attackspace
-        .row.no-gutters.block
-            .col-2.col-sm-1.col-lg-1.spacer
-                .icon.attack
-                .row
-                    .col-12
-            .col
-                .text <span class='roller #{g}'>#{by}</span> rolls for damage!
-        .row.no-gutters.attack
-            .col-1
-            .col.damage
-                .text #{form} <span class='result #{c} #{f} #{n}'>#{result} </span> #{sublabel}
+    - var g = (by.indexOf('(GM)') != -1) ? 'gm':'';
+    - var form = formula.replace(/\d+$/, "");
+    .container.chat
+        .row
+            .col-12.name.dam #{by} #{c} #{f}
+        .row
+            .col-12
+                .content.roll.w-100.text-center
+                    .avatar.flex.damage #{result}
+                    .content.result #{form} <span class='total #{c} #{f} #{n}'>#{result}</span>
+                    
+                    if d != ''
+                        .desc #{sublabel}
+                    
