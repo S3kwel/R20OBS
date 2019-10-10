@@ -215,8 +215,10 @@ $(async function () {
                         r['type'] = 'roll'; 
                         r['formula'] = $(msg).children('.formula').html().toLowerCase().replace('rolling', '');
                         r['result'] = $(msg).children('.rolled').html(); 
-						//alert($(msg).children('.rolled').html()); 
-                        r = critHandle('.critsuccess', '.critfail', msg, r); 
+						
+						console.log($(msg).children('.rolled').html()); 
+                        
+						r = critHandle('.critsuccess', '.critfail', msg, r); 
                     }
 
                     //ATTACK COMMANDS
@@ -228,6 +230,7 @@ $(async function () {
                     if (msg.find('.sheet-rolltemplate-atk').length != 0) {
                         let element = msg.find('.sheet-rolltemplate-atk');
                         let rollResult = element.find('.inlinerollresult').text(); 
+						console.log(rollResult); 
                         log("ATTACK COMMAND");
                         let rollFormula = $(element.find('.inlinerollresult').attr('title')).text();
                             rollFormula = rollFormula.replace(/\w*cs>\w*/g, rollFormula.match(/\((\d*)/gm)[0]);
@@ -238,6 +241,7 @@ $(async function () {
 
                         r['type'] = 'attack';
                         r['result'] = rollResult; 
+						
                         r['formula'] = rollFormula; 
 
                         r['sublabel'] = $(element).find('.sheet-sublabel').text().trim();
@@ -297,6 +301,7 @@ $(async function () {
                         let element = msg.find('.sheet-damagetemplate'); 
 
                         let rollResult = element.find('.inlinerollresult').text();
+						console.log(rollResult); 
                         let rollFormula = $(element.find('.inlinerollresult').attr('title')).text();
                         rollFormula = rollFormula.replace(/\w*cs>\w*/g, rollFormula.match(/\((\d*)/gm)[0]);
                         rollFormula = rollFormula.replace(/\(/g, "");
@@ -360,6 +365,7 @@ $(async function () {
                         log("SKILL");
 
                         let rollResult = element.find('.inlinerollresult').html();
+						console.log(rollResult); 
                         let rollFormula = $(element.find('.inlinerollresult').attr('title')).text();
                         rollFormula = rollFormula.replace(/\w*cs>\w*/g, rollFormula.match(/\((\d*)/gm)[0]);
                         rollFormula = rollFormula.replace(/\(/g, "");
@@ -379,6 +385,7 @@ $(async function () {
                         log("NPC ROLL");
 
                         let rollResult = element.find('.inlinerollresult').text();
+						console.log(rollresult); 
                         let rollFormula = $(element.find('.inlinerollresult').attr('title')).text();
                         rollFormula = rollFormula.replace(/\w*cs>\w*/g, rollFormula.match(/\((\d*)/gm)[0]);
                         rollFormula = rollFormula.replace(/\(/g, "");
@@ -405,6 +412,7 @@ $(async function () {
                         log("NPC ATTACK");
 
                         let rollResult = element.find('.inlinerollresult').text();
+						console.log(rollResult); 
                         let rollFormula = $(element.find('.inlinerollresult').attr('title')).text();
                         rollFormula = rollFormula.replace(/\w*cs>\w*/g, rollFormula.match(/\((\d*)/gm)[0]);
                         rollFormula = rollFormula.replace(/\(/g, "");
