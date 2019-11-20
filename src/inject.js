@@ -48,11 +48,30 @@ $(function(){
 					//console.log(`${current}/${to}`);
 					$("#zoomslider").data('slider').options.slide(null,{value:current})
 				}
+				//let v = $._data( $(document)[0], "events" );'
+				//TO GET EVENTS BOUND TO DOCUMENT
 			},speed);	
 		});
 		
 		
-
+        var s = $("#editor-wrapper");
+        s.on("scroll", function() {
+            var e = Math.round(s.scrollTop() / d20.engine.canvasZoom)
+              , t = Math.round(s.scrollLeft() / d20.engine.canvasZoom);
+            t < d20.engine.padding ? (d20.engine.paddingOffset[0] = d20.engine.padding - t,
+            d20.engine.currentCanvasOffset[0] = 0) : d20.engine.pageWidth / d20.engine.canvasZoom - t - d20.engine.canvasWidth / d20.engine.canvasZoom + d20.engine.padding < 0 ? (d20.engine.paddingOffset[0] = d20.engine.pageWidth / d20.engine.canvasZoom - t - d20.engine.canvasWidth / d20.engine.canvasZoom + d20.engine.padding,
+            d20.engine.currentCanvasOffset[0] = t - d20.engine.padding + d20.engine.paddingOffset[0]) : (d20.engine.paddingOffset[0] = 0,
+            d20.engine.currentCanvasOffset[0] = t - d20.engine.padding),
+            e < d20.engine.padding ? (d20.engine.paddingOffset[1] = d20.engine.padding - e,
+            d20.engine.currentCanvasOffset[1] = 0) : d20.engine.pageHeight / d20.engine.canvasZoom - e - d20.engine.canvasHeight / d20.engine.canvasZoom + d20.engine.padding < 0 ? (d20.engine.paddingOffset[1] = d20.engine.pageHeight / d20.engine.canvasZoom - e - d20.engine.canvasHeight / d20.engine.canvasZoom + d20.engine.padding,
+            d20.engine.currentCanvasOffset[1] = e - d20.engine.padding + d20.engine.paddingOffset[1]) : (d20.engine.paddingOffset[1] = 0,
+            d20.engine.currentCanvasOffset[1] = e - d20.engine.padding);
+            var n = d20.engine.pageWidth + 2 * d20.engine.padding < d20.engine.canvasWidth ? d20.engine.pageWidth : d20.engine.canvasWidth - d20.engine.paddingOffset[0]
+              , i = d20.engine.pageHeight + 2 * d20.engine.padding < d20.engine.canvasHeight ? d20.engine.pageHeight : d20.engine.canvasHeight - d20.engine.paddingOffset[1];
+            a.width() == n && a.height() == i || a.css({
+                width: n + "px",
+                height: i + "px"
+            });
 		
 	}
 	go();
@@ -70,7 +89,12 @@ $(function(){
 			datas.push({el: e, d: data}); 
 		}
 	});
-	console.log(datas); 
+	
+	for(let d of datas){
+		let dataKeys = Object.keys(d); 
+		
+		for(dK of d
+	}
 	//"mousewheel"
 	
 	
