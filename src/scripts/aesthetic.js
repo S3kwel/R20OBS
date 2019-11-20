@@ -6,17 +6,22 @@ $(function () {
 	
 	
 	//Set Zoom Level...
-	var slider = $('#zoomslider').find('a').eq(0);
-		console.log(slider); 
-		
+	
+	$('#zoomslider').slider({orientation:"vertical",min:10,max:250,value:100});
+	//let slider = $('#zoomslider'); 
+
+	//d20.engine.slideZoom(n, !0);
+	$('#zoomslider').slider('value',200);  
+	//$('#zoomslider').slider('slide');
+	//$('#zoomslider').trigger('change');
+	
+
+	
+
 		//Only works in popup mode.  
 		window.resizeTo(1280, 720);
 	
-		setInterval(function(){
-		slider.slider('value',50);
-		
-		
-		},500);
+	
 		$('#zoomslider').find('a').click();
 
                                      

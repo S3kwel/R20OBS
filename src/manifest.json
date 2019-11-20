@@ -32,12 +32,16 @@
     "webRequest",
     "webRequestBlocking",
     "storage",
-    "*://supportcenter.rbdigital.com/*"
+    "*://app.roll20.net/*"
   ],
+  "browser_action": {
+    "default_title": "Inject!"
+  },
   "web_accessible_resources": [
     "images/*.png",
     "templates/*",
-    "scripts/*"
+    "scripts/*",
+	"inject.js"
   ],
   "browser_action": {
     "default_icon": "images/icon48.png"
