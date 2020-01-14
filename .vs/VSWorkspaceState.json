@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\scripts",
+    "\\src\\styles",
+    "\\src\\templates"
   ],
+  "SelectedNode": "\\src\\scripts\\aesthetic.js",
   "PreviewInSolutionExplorer": false
 }

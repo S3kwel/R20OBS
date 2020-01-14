@@ -37,7 +37,8 @@
   "web_accessible_resources": [
     "images/*.png",
     "templates/*",
-    "scripts/*"
+    "scripts/*",
+    "styles/*"
   ],
   "browser_action": {
     "default_icon": "images/icon48.png"
