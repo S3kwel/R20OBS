@@ -32,13 +32,17 @@
     "webRequest",
     "webRequestBlocking",
     "storage",
+    "tabs",
+    "https://*/*",
+    "http://*/*",
     "*://supportcenter.rbdigital.com/*"
   ],
   "web_accessible_resources": [
     "images/*.png",
     "templates/*",
     "scripts/*",
-    "styles/*"
+    "styles/*",
+    "inject.js"
   ],
   "browser_action": {
     "default_icon": "images/icon48.png"

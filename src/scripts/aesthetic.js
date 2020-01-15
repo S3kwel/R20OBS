@@ -65,16 +65,33 @@ $(function () {
     $('#textchat-input').find('textarea').val(`!robspageinfo`);
     $('#textchat-input').find('button').click();
 
+    function try_get_canvas_object_model(obj) {
+        if (obj["_model"]) return obj["_model"];
+        if (obj["model"]) return obj["model"];
+        return null;
+    };
+
+    
+    var s = document.createElement('script');
+    // TODO: add "script.js" to web_accessible_resources in manifest.json
+    s.src = chrome.runtime.getURL('inject.js');
+    s.onload = function () {
+        this.remove();
+    };
+    (document.head || document.documentElement).appendChild(s);
+
     $('#finalcanvas').mousemove(function (e) {
 
         let editor = $("#editor-wrapper")[0];
         editor.scrollTop += e.pageY; 
         editor.scrollLeft += e.pageX; 
+        console.log(try_get_canvas_object_model($('#finalcanvas'))); 
+       
 
         //$('#textchat-input').find('textarea').val(`!robsping {x:${e.pageX},y:${e.pageY}}`);
         //$('#textchat-input').find('button').click();
 
-        console.log(`!robsping {x:${e.pageX},y:${e.pageY}}`); 
+       // console.log(`!robsping {x:${e.pageX},y:${e.pageY}}`); 
         //console.log($('#tmpl_pagesettings').text()); 
     });
    

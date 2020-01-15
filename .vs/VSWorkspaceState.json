@@ -3,9 +3,9 @@
     "",
     "\\src",
     "\\src\\scripts",
-    "\\src\\styles",
+    "\\src\\scripts\\R20API",
     "\\src\\templates"
   ],
-  "SelectedNode": "\\src\\scripts\\aesthetic.js",
+  "SelectedNode": "\\.gitattributes",
   "PreviewInSolutionExplorer": false
 }
