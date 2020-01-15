@@ -56,19 +56,27 @@ $(function () {
        
 
 
-        $('#textchat-input').find('textarea').val('foobar'); 
-        console.log($('#textchat-input').find('textarea'));
-        $('#textchat-input').find('button').click(); 
-        console.log($('#textchat-input').find('button')); 
+       
     }); 
    $('#page-toolbar').append(handleTemplate); 
    //#finalcanvas has the ping event.
 
-    //Consider calling an API sendPing command via some trigger on the frontend.  
-    $('#textchat-input').find('textarea').css('border', '1px solid red !important; ');
 
-    $('#textchat-input').find('button').css('border', '1px solid red !important; ');
+    $('#textchat-input').find('textarea').val(`!robspageinfo`);
+    $('#textchat-input').find('button').click();
 
+    $('#finalcanvas').mousemove(function (e) {
+
+        let editor = $("#editor-wrapper")[0];
+        editor.scrollTop += e.pageY; 
+        editor.scrollLeft += e.pageX; 
+
+        //$('#textchat-input').find('textarea').val(`!robsping {x:${e.pageX},y:${e.pageY}}`);
+        //$('#textchat-input').find('button').click();
+
+        console.log(`!robsping {x:${e.pageX},y:${e.pageY}}`); 
+        //console.log($('#tmpl_pagesettings').text()); 
+    });
    
 
 });

@@ -16,9 +16,11 @@
     display: none;
 }
 
+#zoomslider{
+    display: none; 
+}
 
 /**Add color to background (for knockout in OBS)**/
-
 #editor-wrapper {
     overflow: hidden !important;
     background-color: #0000ff !important;
