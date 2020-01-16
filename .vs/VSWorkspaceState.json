@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\misc",
     "\\src\\scripts",
-    "\\src\\scripts\\R20API",
+    "\\src\\styles",
     "\\src\\templates"
   ],
-  "SelectedNode": "\\.gitattributes",
+  "SelectedNode": "\\src\\scripts\\aesthetic.js",
   "PreviewInSolutionExplorer": false
 }

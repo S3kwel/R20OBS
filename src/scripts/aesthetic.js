@@ -5,88 +5,81 @@ $(function () {
     let type = "setmode";
     let title = "Streaming Mode"; 
     let url = chrome.extension.getURL("/"); 
+    
+    
 
     var handleTemplate = `
-    <span class='test'>
     <div class="customHandle showtip handleDisable setmode ${type}" style="bottom: -30px; right: 360px;" original-title="${title}">
         <span class="pictos">E</span>
-    </div></span>`;
+    </div>`;
 
-   
+    
 
+    var bgTemplate = `
+    <video autoplay muted loop id="R20OBSBG">
+        <source src="${url}images/magic.mp4" type="video/mp4">
+    </video>`; 
+
+    $('#page-toolbar').append(handleTemplate);
+    $('.tabmenu').find('.setmode').addClass('tabmenu'); 
+
+
+    function enterStreamingMode() {
+        
        
-   
+
+        var sideBarState = ($("#rightsidebar").css('display') == 'none') ? false : true;
+        let sheet = $('#streamsheet');
+
+        //Toggle the CSS state for the button.
+        $('.setmode').toggleClass('handleDisable');
+        //If true, click to hide.  
+        if (sideBarState) {
+            $("#sidebarcontrol").click();
+        }
+
+        //Check for the streaming stylesheet.  Add it, if needed.  
+        if (sheet.length == 0) {
+            $('head').append(`<link ID = "streamsheet" rel='stylesheet' type="text/css" href="${url}styles/stream.css">`);
+            $(bgTemplate).insertAfter("#editor-wrapper")
+            return;
+        }
+
+        //Otherwise, remove it.
+        $('#streamsheet').remove();
+        $("#R20OBSBG").remove();
+        sidebarRight = $("#sidebarcontrol").css('right');
+
+        //If false, click to show. 
+        if (!sideBarState) {
+            $('#sidebarcontrol').click();
+        }
+    }
+
 
     //Handler for "Extension Visuals" button
     $('#sidebarcontrol').click(function (event) {
-    
-
         newRight = $('.handle.showtip').not('.setmode').css('right');
         newRight = parseInt(newRight.substring(0, newRight.indexOf('px'))) + 35;
         $('.setmode').css('right', newRight + "px");
     });
 
-    $('body').on('click','.setmode',function () {
-        //Toggle the CSS class for the X over the icon.
-        $(this).toggleClass('handleDisable'); 
+    //Toggle streaming mode w/ the added icon.  
+    $('body').on('click', '.setmode',enterStreamingMode); 
 
-        $("#sidebarcontrol").click(); 
 
-        //Check for the streaming stylesheet.  Add it, if needed.  
-        let sheet = $('#streamsheet');
-        if (sheet.length == 0) {
-            $('head').append(`<link ID = "streamsheet" rel='stylesheet' type="text/css" href="${url}styles/stream.css">`);
+    $('body').on('keyup', function (e) {
+        if (e.key == "F11") {
+            enterStreamingMode(); 
         }
-        else {
-            $('#streamsheet').remove();
-            if (sidebarRight == "0px") {
-                $('#sidebarcontrol').click();
-            }
-        }
+    });
 
-       
-        //Click the button to toggle the chat
-        let sidebarRight = $("#sidebarcontrol").css('right'); 
-        if (sidebarRight != "0px") {
-            $('#sidebarcontrol').click(); 
-        }
-
-       
-       
-       
-
-
-       
-    }); 
-   $('#page-toolbar').append(handleTemplate); 
-   //#finalcanvas has the ping event.
-
-
-    $('#textchat-input').find('textarea').val(`!robspageinfo`);
-    $('#textchat-input').find('button').click();
-
-    function try_get_canvas_object_model(obj) {
-        if (obj["_model"]) return obj["_model"];
-        if (obj["model"]) return obj["model"];
-        return null;
-    };
-
-    
-    var s = document.createElement('script');
-    // TODO: add "script.js" to web_accessible_resources in manifest.json
-    s.src = chrome.runtime.getURL('inject.js');
-    s.onload = function () {
-        this.remove();
-    };
-    (document.head || document.documentElement).appendChild(s);
-
+  
+ 
     $('#finalcanvas').mousemove(function (e) {
 
         let editor = $("#editor-wrapper")[0];
-        editor.scrollTop += e.pageY; 
-        editor.scrollLeft += e.pageX; 
-        console.log(try_get_canvas_object_model($('#finalcanvas'))); 
-       
+
 
         //$('#textchat-input').find('textarea').val(`!robsping {x:${e.pageX},y:${e.pageY}}`);
         //$('#textchat-input').find('button').click();

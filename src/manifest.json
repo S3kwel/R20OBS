@@ -38,7 +38,7 @@
     "*://supportcenter.rbdigital.com/*"
   ],
   "web_accessible_resources": [
-    "images/*.png",
+    "images/*",
     "templates/*",
     "scripts/*",
     "styles/*",

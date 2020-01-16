@@ -7,3 +7,5 @@ C:\Users\dmhic\Documents\GitHub\R20OBS\server\server\bin\Microsoft.NodejsTools.W
 C:\Users\dmhic\Source\Repos\S3kwel\R20OBS\server\server\obj\Debug\server.njsprojAssemblyReference.cache
 C:\Users\dmhic\Source\Repos\S3kwel\R20OBS\server\server\obj\Debug\server.njsproj.CoreCompileInputs.cache
 C:\Users\dmhic\Source\Repos\S3kwel\R20OBS\server\server\bin\Microsoft.NodejsTools.WebRole.dll
+E:\Github\R20OBS\server\server\obj\Debug\server.njsprojAssemblyReference.cache
+E:\Github\R20OBS\server\server\bin\Microsoft.NodejsTools.WebRole.dll

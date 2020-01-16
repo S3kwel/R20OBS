@@ -33,3 +33,24 @@
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+
+li.setmode {
+    position: absolute; 
+}
+
+.tabmenu {
+    position: relative;
+    bottom: 0; 
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+    z-index: 10010 !important;
+    cursor: pointer;
+    background-color: purple;
+    color: white;
+    padding: 3px 3px 6px 3px;
+    opacity: .75;
+    font-size: 26px;
+    line-height: 26px;
+}

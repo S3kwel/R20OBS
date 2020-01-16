@@ -40,24 +40,3 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         file: 'inject.js'
     });
 });
-
-var urls = ["https://app.roll20.net/assets/base.js",
-    "https://app.roll20.net/assets/app.js"];
-
-var host = "https://app.roll20.net/editor/";
-
-chrome.webRequest.onBeforeRequest.addListener(
-    function (details) {
-        let u = chrome.extension.getURL('/');
-
-        if (details.url.indexOf("base.js") != -1) {
-            alert('intercept'); 
-            return { redirectUrl: "https://app.roll20.net/assets/base.js" };
-        }
-
-     
-
-    }, {
-        urls: ["https://app.roll20.net/assets/base.js*"] },
-    ["blocking"]
-);

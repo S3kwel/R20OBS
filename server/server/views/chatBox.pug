@@ -9,12 +9,14 @@ block content
         socket.emit("parse",data);
     });
 
+
     socket.on("parsed",function(data){
+             $('.chat').fadeOut();
         console.log("DATA REC");
         console.log(data);
         data = $(data).css('display','none');
         $('body').prepend(data);
-        $('.chat').first().slideDown(200); 
+        $('.chat').first().fadeIn(200); 
     });
         
     
