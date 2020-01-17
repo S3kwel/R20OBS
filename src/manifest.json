@@ -12,7 +12,7 @@
   },
   "author": "Dustin Hickman (dmhickman92@gmail.com)",
   "background": {
-    "scripts": [ "scripts/lib/jquery.min.js", "hot-reload.js","scripts/back.js"],
+    "scripts": [ "scripts/lib/browser-polyfill.js", "scripts/lib/jquery.min.js", "hot-reload.js", "scripts/back.js" ],
     "persistent": true
   },
   "content_scripts": [
