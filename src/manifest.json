@@ -18,7 +18,7 @@
   "content_scripts": [
     {
       "matches": [ "*://app.roll20.net/editor/" ],
-      "js": [ "scripts/lib/jquery.min.js", "scripts/messages.js", "scripts/aesthetic.js" ],
+      "js": [ "scripts/lib/jquery.min.js", "scripts/d20.js" ],
       "css": [ "styles/jukebox.css", "styles/main.css", "styles/message.css" ]
     }
   ],

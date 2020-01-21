@@ -30,9 +30,6 @@ chrome.runtime.onMessage.addListener(
     });
 
  const MESSAGE_KEY_DOM_LOADED = "r20es_domLoaded";
- const MESSAGE_KEY_CHROME_INJECTION_DONE = "r20esChromeInjectionDone";
- const MESSAGE_KEY_LOAD_MODULES = "r20esLoadModules";
- const ELEMENT_ID_BOOTSTRAP_FLASH_WORKAROUND_STYLE = "r20es-bootstrap-flash-workaround-style";
 
 const editorUrls = [
     "https://app.roll20.net/editor",
@@ -85,6 +82,7 @@ const isEditorRequest = (request) => {
     return false;
 };
 
+
 const beginRedirectQueue = () => {
     if (isRedirecting) {
         return;
@@ -94,23 +92,15 @@ const beginRedirectQueue = () => {
     alreadyRedirected = {};
     redirectQueue = [];
 
-    console.log("Beginning redirect queue.");
+    //console.log("Beginning redirect queue.");
 };
 
 const endRedirectQueue = () => {
-    console.log("Ending redirect queue.");
+    //console.log("Ending redirect queue.");
     isRedirecting = false;
 };
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-    if (msg[MESSAGE_KEY_DOM_LOADED]) {
-        endRedirectQueue();
-
-        console.log("Received MESSAGE_KEY_DOM_LOADED from content script, responding with redirectQueue:", redirectQueue);
-        sendResponse(redirectQueue);
-    }
-});
-
+//Blocks the request and adds it to the redirect queue.  
 window.requestListener = function (request) {
     if (isEditorRequest(request)) {
         console.log("Editor, blocking:", request.url, request);
@@ -123,61 +113,75 @@ window.requestListener = function (request) {
                 beginRedirectQueue();
 
                 if (alreadyRedirected[request.url]) {
-                    console.log(`not queueing request due to alreadyRedirected: ${request.url}`, request);
+                    //console.log(`not queueing request due to alreadyRedirected: ${request.url}`, request);
                 }
                 else {
-                    console.log(`queueing ${request.url}`);
+                    //console.log(`queueing ${request.url}`);
                     redirectQueue.push(request.url);
                     alreadyRedirected[request.url] = true;
 
                     return {
                         cancel: true
-                    };
+                    }
                 }
 
                 break;
             }
         }
     }
+}
+
+//Send the redirect queue to the content script.  
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    if (msg[MESSAGE_KEY_DOM_LOADED]) {
+        endRedirectQueue();
+
+        console.log("Received MESSAGE_KEY_DOM_LOADED from content script, responding with redirectQueue:", redirectQueue);
+        sendResponse(redirectQueue);
+    }
+});
+
+/*
+ * Sets the CSP header of req to a BLOB'ed version of itself.  
+ * */
+const headerCallback = (req) => {
+
+    if (!isEditorRequest(req)) {
+        return;
+    }
+
+    //console.log("Editor, headers:", req.url, req);
+    beginRedirectQueue();
+
+    //console.log(`HEADER CALLBACK (processing headers) for ${req.url}`, req);
+
+    const headers = JSON.parse(JSON.stringify(req.responseHeaders));
+
+    let idx = headers.length;
+    while (idx-- > 0) {
+        const header = headers[idx];
+
+        const name = header.name.toLowerCase();
+        if (name !== "content-security-policy") {
+            //console.log(`ignoring header ${name}`);
+            continue;
+        }
+
+        header.value += " blob:";
+        console.log("!!MODIFIED HEADERS!!");
+        break;
+    }
+
+    return { responseHeaders: headers };
 };
 
+//Prep listeners for headers, requests.  
+chrome.webRequest.onHeadersReceived.addListener(
+    headerCallback,
+    { urls: editorUrls },
+    ["blocking", "responseHeaders"]);
 
-    const headerCallback = (req) => {
-
-        if (!isEditorRequest(req)) {
-            return;
-        }
-
-        console.log("Editor, headers:", req.url, req);
-        beginRedirectQueue();
-
-        console.log(`HEADER CALLBACK (processing headers) for ${req.url}`, req);
-
-        const headers = JSON.parse(JSON.stringify(req.responseHeaders));
-
-        let idx = headers.length;
-        while (idx-- > 0) {
-            const header = headers[idx];
-
-            const name = header.name.toLowerCase();
-            if (name !== "content-security-policy") {
-                console.log(`ignoring header ${name}`);
-                continue;
-            }
-
-            header.value += " blob:";
-            console.log("!!MODIFIED HEADERS!!");
-            break;
-        }
-
-        return { responseHeaders: headers };
-    };
-
-    chrome.webRequest.onHeadersReceived.addListener(
-        headerCallback,
-        { urls: editorUrls },
-        ["blocking", "responseHeaders"]);
-    chrome.webRequest.onBeforeRequest.addListener(
-        window.requestListener,
-        { urls: ["*://app.roll20.net/*"] },
-        ["blocking"]);
+chrome.webRequest.onBeforeRequest.addListener(
+    window.requestListener,
+    { urls: ["*://app.roll20.net/*"] },
+    ["blocking"]);
