@@ -1,11 +1,3 @@
-
-
-{
-    const DOMContentLoaded_event = document.createEvent("Event");
-    DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true);
-    window.document.dispatchEvent(DOMContentLoaded_event);
-}
-
 const waitTime = 200;
 let waitedFor = 0;
 
@@ -18,13 +10,10 @@ const waitForDepts = () => {
     if (!hasJQuery || !hasSoundManager || !hasD20) {
         waitedFor += waitTime;
         setTimeout(waitForDepts, waitTime);
-
         console.log("WAITING FOR DEPTS.");
-        console.log(hasJQuery);
-        console.log(hasSoundManager);
-        console.log(hasD20);
 
-        return;
+
+        return false; 
     }
 
     console.log(`All dependencies fulfilled after ${waitedFor}ms`);
@@ -33,7 +22,10 @@ const waitForDepts = () => {
         window.r20esChrome.readyCallbacks[i]();
     }
 
+    window.postMessage("ready", "*"); 
+
    
 }
+
 waitForDepts();
 

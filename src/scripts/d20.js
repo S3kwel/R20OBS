@@ -7,6 +7,8 @@ $(function () {
         e = document.createElement('script');
         var m = document.getElementsByTagName('head')[0];
         e.src = chrome.extension.getURL(u);
+        e.dataset["extension"] = chrome.extension.getURL("/"); 
+        e.classList.add("R20OBS_SCRIPT");  
         m.appendChild(e);
 
     }
@@ -101,6 +103,12 @@ $(function () {
     };
 
     waitForDepts();
+
+    window.onmessage = function (event) {
+        if (event.data == "ready") {
+            injectScript("scripts/aesthetic.js"); 
+        }
+    };
 
 
 });

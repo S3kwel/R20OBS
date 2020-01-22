@@ -1,16 +1,13 @@
-$(function () {
-    let type = "setmode";
-    let title = "Streaming Mode"; 
-    let url = chrome.extension.getURL("/"); 
-   
-   
+let type = "setmode";
+let title = "Streaming Mode"; 
+let url = $('script.R20OBS_SCRIPT').eq(0).data('extension'); 
 
- 
 
-    var handleTemplate = `
-    <div class="customHandle showtip handleDisable setmode ${type}" style="bottom: -30px; right: 360px;" original-title="${title}">
-        <span class="pictos">E</span>
-    </div>`;
+
+var streamingMode = `
+<div class="customHandle showtip handleDisable setmode" style="bottom: -30px; right: 393px;" original-title="Streaming Mode">
+    <span class="pictos">E</span>
+</div>`;
 
     
 
@@ -19,7 +16,7 @@ $(function () {
         <source src="${url}images/magic.mp4" type="video/mp4">
     </video>`; 
 
-    $('#page-toolbar').append(handleTemplate);
+    $('#page-toolbar').append(streamingMode);
     $('.tabmenu').find('.setmode').addClass('tabmenu'); 
 
    
@@ -67,9 +64,3 @@ $(function () {
     $('body').on('click', '.setmode',enterStreamingMode); 
 
 
-    $('body').on('keyup', function (e) {
-        if (e.key == "F11") {
-            enterStreamingMode(); 
-        }
-    });
-});
