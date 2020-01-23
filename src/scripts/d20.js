@@ -54,7 +54,9 @@ $(function () {
 
                             //D20 Expose!
                             hookedData = hookedData.replace('getPointer,degreesToRadians;', 'getPointer,degreesToRadians;window.d20=d20;');
-                            //const hookQueue = getHooks(hooks, url);
+
+                         
+                            //alert(hookedData.indexOf("DRAWPINGS")); 
 
                             const blob = new Blob([hookedData]);
                             const hookedScriptUrl = URL.createObjectURL(blob);

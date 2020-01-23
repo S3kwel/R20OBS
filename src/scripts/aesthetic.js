@@ -38,8 +38,6 @@ var streamingMode = `
 
         //Grab the BG color from the engine.
         var overlayColor = d20.engine.backgroundColor;
-       
-
         var sideBarState = ($("#rightsidebar").css('display') == 'none') ? false : true;
         let sheet = $('#streamsheet');
 
@@ -55,7 +53,8 @@ var streamingMode = `
             $('head').append(`<link ID = "streamsheet" rel='stylesheet' type="text/css" href="${url}styles/stream.css">`);
             $(bgTemplate).insertAfter("#editor-wrapper");
             $(overlayTemplate).insertAfter("#R20OBSBG");
-            $("#R20OBSOVERLAY").css('background-color',overlayColor)
+            $("#R20OBSOVERLAY").css('background-color', overlayColor);
+            d20.engine.slideZoom(2);
             return;
         }
 
@@ -91,5 +90,3 @@ var streamingMode = `
     //Toggle streaming mode w/ the added icon.  
     $('body').on('click', '.setmode',enterStreamingMode); 
 
-
-   
